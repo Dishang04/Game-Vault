@@ -1,0 +1,16 @@
+<main>
+    <h1>Games</h1>
+
+    <app-game-search></app-game-search>
+
+    <ul class="gamesList">
+        <li class="gameCard" *ngFor="let game of games" [routerLink]="['/detail', game.id]">
+            <h2 class="gameCardHeader">{{game.name}}</h2>
+            <p class="gameCardInfo">Available on: {{game.platform}}</p>
+            <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
+        </li>
+    </ul>
+</main>
+
+
+<!-- <app-game-detail [game]="selectedGame"></app-game-detail> -->

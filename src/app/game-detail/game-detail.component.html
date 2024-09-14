@@ -1,0 +1,15 @@
+<main>
+    <section *ngIf="game">
+        <h1>{{game.name}}</h1>
+        <p>id: {{game.id}}</p>
+        <p>Description: {{game.description}}</p>
+        <p>Released: {{ game.released | date: 'MMMM d, y' }}</p>
+        <p>platform: {{game.platform}}</p>
+        <p>Genres: {{game.genres}}</p>
+        <p>Game Modes: {{ game.modes ? game.modes : 'Unknown' }}</p>
+        
+        <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
+    </section>
+    
+    <button type="button" (click)="goBack()">go back</button>
+</main>

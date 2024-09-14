@@ -1,0 +1,19 @@
+.searchbar{
+    padding: 10px;
+    margin-top: 60px;
+    width: 70vw;
+    font-size: 18px;
+    margin-left: 10%;
+}
+
+.searchbar:focus {
+    outline: 2px solid  #000033;
+}
+
+/* @media screen and (min-width: 800px){
+    .searchbar{
+        width: 60vw;
+    }
+} */
+
+

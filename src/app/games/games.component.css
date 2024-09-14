@@ -1,0 +1,77 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-weight: 400;
+  min-height: 100vh;
+  font-size: 1.8rem;
+  font-family: "Epilogue", sans-serif;
+}
+
+h1{
+  text-align: center;
+  font-weight: 400;
+  margin-top: 100px;
+}
+
+.gamesList{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 40px;
+  grid-column-gap: 40px;
+  padding: 40px;
+}
+
+.gameCard{
+  list-style: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.gameCard:hover{
+  transform: translateY(-10px);
+  transition: 0.2s all;
+  box-shadow: 0 14px 8px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.gameCardHeader{
+  font-size: 24px;
+  background-color: blue;
+  text-align: center;
+  color: white;
+  padding: 20px 40px;
+  margin-top: 0px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.gameCardInfo{
+  padding: 22px;
+}
+
+.gameImage {
+  width: 100%;  /* Make the image responsive */
+  max-width: 600px;  /* Limit the max width */
+  height: auto;
+  border-radius: 10px;  /* Add rounded corners */
+  margin-bottom: 20px;  /* Add space below the image */
+}
+
+@media screen and (min-width: 800px){
+  .gamesList{
+      grid-template-columns: 1fr 1fr;
+      margin-top: 5%;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .gamesList{
+      grid-template-columns: 1fr 1fr 1fr;
+  }
+}
