@@ -1,3 +1,8 @@
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule} from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
@@ -11,6 +16,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GameSearchComponent } from './game-search/game-search.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FavoriteComponent } from './favorite/favorite.component';
+import { MyGamesComponent } from './my-games/my-games.component';
+import { OwnedComponent } from './owned/owned.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -18,16 +28,27 @@ import { HttpClientModule } from '@angular/common/http';
     GamesComponent,
     GameDetailComponent,
     DashboardComponent,
-    GameSearchComponent
+    GameSearchComponent,
+    FavoriteComponent,
+    MyGamesComponent,
+    OwnedComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatButtonModule,
+    MatTooltipModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatMenuModule,
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync('noop'),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

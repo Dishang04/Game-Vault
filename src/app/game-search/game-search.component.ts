@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-game-search',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './game-search.component.css'
 })
 export class GameSearchComponent {
+  @Output() searchQuery = new EventEmitter<string>();
 
+  onSearch(value: string): void{
+    console.log('User input:', value); 
+    this.searchQuery.emit(value);
+  }
 }

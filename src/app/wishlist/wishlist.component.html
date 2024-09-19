@@ -1,9 +1,7 @@
-<h1>Games</h1>
-
-<app-game-search (searchQuery)="onSearch($event)"></app-game-search>
+<h1>Wishlist</h1>
 
 <ul class="gamesList">
-    <li class="gameCard" *ngFor="let game of games" >
+    <li class="gameCard" *ngFor="let game of favoriteGames" >
         <div class="gameCardClickable" [routerLink]="['/detail', game.id]">
             <h2 class="gameCardHeader">{{game.name}}</h2>
             <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
@@ -13,16 +11,8 @@
         </div>
         <app-favorite 
             class="favoriteIcon" 
-            [isFavorite]="favoriteService.isFavorite(game)" 
+            [isFavorite]="true" 
             (favoriteChange)="onFavoriteChange(game, $event)">
         </app-favorite>
-        <app-owned></app-owned>
     </li>
 </ul>
-
-
-<!-- 
-maybe try to get/show certain games like new releases or another category
-maybe make a load more button for more games
-make it random which games are shown on the page
- -->

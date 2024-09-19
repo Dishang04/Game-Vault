@@ -4,7 +4,7 @@ h1{
   margin-top: 100px;
 }
 
-h2 {
+/* h2 {
     text-align: center;
   }
   
@@ -12,8 +12,6 @@ h2 {
     padding: 0;
     margin: auto;
     max-width: 1000px;
-  
-    /* flexbox */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -35,8 +33,6 @@ h2 {
     min-width: 70px;
     margin: .5rem auto;
     box-sizing: border-box;
-  
-    /* flexbox */
     order: 0;
     flex: 0 1 auto;
     align-self: auto;
@@ -51,4 +47,4 @@ h2 {
   
   a:hover {
     background-color: #000;
-  }
+  } */

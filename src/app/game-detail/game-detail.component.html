@@ -1,15 +1,35 @@
-<main>
-    <section *ngIf="game">
-        <h1>{{game.name}}</h1>
-        <p>id: {{game.id}}</p>
-        <p>Description: {{game.description}}</p>
-        <p>Released: {{ game.released | date: 'MMMM d, y' }}</p>
-        <p>platform: {{game.platform}}</p>
-        <p>Genres: {{game.genres}}</p>
-        <p>Game Modes: {{ game.modes ? game.modes : 'Unknown' }}</p>
-        
-        <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
-    </section>
+<section *ngIf="game">
+    <h1>{{game.name}}</h1>
+    <!-- <p [innerHTML]="game.description || 'No description available'"></p> -->
+    <p>{{game.description}}</p>
+    <!-- @if(game.description) {
+        <p>{{game.description}}</p>
+    } -->
+    <p>Released: {{ game.released | date: 'MMMM d, y' }}</p>
+    <p>platform: {{game.platform}}</p>
+    <p>Genres: {{game.genres}}</p>
+    <p>Game Modes: {{ game.modes ? game.modes : 'Unknown' }}</p>
+    <p>Developer: {{game.developers}}</p>
+    <p>Publisher: {{game.publishers}}</p>
     
-    <button type="button" (click)="goBack()">go back</button>
-</main>
+    <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
+</section>
+<button type="button" (click)="goBack()">go back</button>
+<!-- <app-favorite></app-favorite> -->
+
+<!-- <h4>Basic native select</h4>
+<mat-form-field>
+  <mat-label>Cars</mat-label>
+  <select matNativeControl required>
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select>
+</mat-form-field> -->
+
+<app-owned></app-owned>
+
+<!-- 
+ADD THE BUTTONS FOR WISHLIST AND OWNED GAMES 
+-->

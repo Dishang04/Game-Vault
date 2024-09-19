@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Game } from './game';
 // import { GAMES } from './mock-games';
 import { Observable, of } from 'rxjs';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +17,24 @@ export class GameService {
 
 
   // GETS THE GAMES FOR GAME PAGE
-  getGames(): Observable<Game[]>{
-    const params = new HttpParams().set('key', this.apiKey);
+  getGames(query: string = ''): Observable<Game[]>{
+    
+    //SHOWS THE SEARCH RESULTS 
+    let params = new HttpParams().set('key', this.apiKey);
+    if(query){
+      params = params.set('page_size', '10').set('page', 1).set('search', query);
+    }
+    console.log('API Params:', params.toString());
 
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       map(response => response.results.map((game: any) => ({
         id: game.id,
         name: game.name,
-        description: game.description_raw,
-        released: game.released,
+        // description: game.description_raw,
+        // released: game.released,
         platform: game.platforms.map((p: any) => p.platform.name).join(', '),
-        modes: game.tags.map((tag: any) => tag.name).filter((name: string) => 
-          name === 'Single-player' || name === 'Multiplayer').join(', '),
+        // modes: game.tags.map((tag: any) => tag.name).filter((name: string) => 
+        //   name === 'Singleplayer' || name === 'Multiplayer').join(', '),
         genres: game.genres.map((genre: any) => genre.name).join(', '),
         image: game.background_image,
       })))
@@ -43,32 +47,21 @@ export class GameService {
     const url = `${this.apiUrl}/${id}`;
 
     return this.http.get<any>(url, { params }).pipe(
+      tap(console.log),
       map(game => ({
         id: game.id,
         name: game.name,
-        description: game.description_raw,
+        description: game.description_raw || game.description,
+        // description: game.description,
         released: game.released,
         platform: game.platforms.map((p: any) => p.platform.name).join(', '),
         modes: game.tags.map((tag: any) => tag.name).filter((name: string) => 
           name === 'Singleplayer' || name === 'Multiplayer').join(', '),
         genres: game.genres.map((genre: any) => genre.name).join(', '),
+        developers: game.developers.map((developer: any) => developer.name).join(', '),
+        publishers: game.publishers.map((publisher: any) => publisher.name).join(', '),
         image: game.background_image,
       }))
     );
   }
-
-
-  /* GET heroes whose name contains search term */
-  // searchGames(term: string): Observable<Game[]> {
-  //   if (!term.trim()) {
-  //     // if not search term, return empty hero array.
-  //     return of([]);
-  //   }
-  //   return this.http.get<Game[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-  //     tap(x => x.length ?
-  //       this.log(`found games matching "${term}"`) :
-  //       this.log(`no games matching "${term}"`)),
-  //     catchError(this.handleError<Game[]>('searchGames', []))
-  //   );
-  // }
 }

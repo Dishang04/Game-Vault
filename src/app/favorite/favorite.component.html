@@ -1,0 +1,16 @@
+<!-- ICON FOR ADD TO WISHLIST -->
+
+<div class="tooltip">
+    <span class="tooltiptext">Add to wishlist</span>
+    <span 
+        class="heartButton bi bi-heart"
+        [class.bi-heart]="!isFavorite"
+        [class.bi-heart-fill]="isFavorite"
+        (click)="onClick()">
+    </span>
+    <!-- title="Add to wishlist" (in the span?) -->
+    <!-- <span class="tooltipText">{{ isFavorite ? 'Remove from favorites' : 'Add to favorites' }}</span> -->
+</div>
+
+
+<!-- GONNA USE THE CSS TOOLTIP OR THE TITLE IN BUTTON? -->

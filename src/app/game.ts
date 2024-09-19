@@ -7,6 +7,6 @@ export interface Game{
     genres: string;
     modes: string;
     image: string;
-    // description
-    // year
+    developers: string;
+    publishers: string;
 }

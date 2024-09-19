@@ -1,0 +1,40 @@
+<!-- ICON FOR ADD OPTIONS -->
+
+<span 
+    class="addToButton bi bi-plus-circle"
+    [matMenuTriggerFor]="menu">
+</span>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="addToCurrentlyPlaying()">
+        <span class="optionsButton bi bi-controller"></span>
+        Add to currently playing</button>
+    <button mat-menu-item (click)="addToPlayedGames()">
+        <span class="optionsButton bi bi-check2-circle"></span>
+        Add to played/finished games</button>
+    <button mat-menu-item (click)="addToMyGames()">
+        <span class="optionsButton bi bi-safe2"></span>
+        Add to my games</button>
+    <!-- <button mat-menu-item (click)="addToNewCollection()">
+        <span class="optionsButton"></span>
+        Add to new collection</button> -->
+    <button mat-menu-item>
+        <span class="optionsButton bi bi-safe"></span>
+        test</button>
+    <button mat-menu-item>
+        <span class="optionsButton bi bi-piggy-bank"></span>
+        test</button>
+    <button mat-menu-item>
+        <span class="optionsButton bi bi-box2-heart"></span>
+        test</button>
+
+    <!-- <button mat-menu-item (click)="addToNewCollection()">Add to new collection</button> -->
+    <!-- <button mat-menu-item (click)="addToWishlist()">Add to Wishlist</button> -->
+    <!-- <button mat-menu-item (click)="addToFavorites()">Add to Favorites</button> -->
+  </mat-menu>
+
+
+<!--
+change plus icon to checkmark like spotify?
+ 
+-->

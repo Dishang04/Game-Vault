@@ -4,9 +4,10 @@
       <a routerLink="/dashboard">MyApp</a>
     </div> -->
     <div class="nav-links" id="navLinks">
-      <a routerLink="/dashboard">Home</a>
-      <a routerLink="/games">Games</a>
-      <a routerLink="">My games</a>
+      <a routerLink="/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/games" routerLinkActive="active-link">Games</a>
+      <a routerLink="/my-games" routerLinkActive="active-link">My games</a>
+      <a routerLink="/wishlist" routerLinkActive="active-link">Wishlist</a>
     </div>
     <div class="hamburger" id="hamburger" (click)="toggleMenu()">
       <span></span>
@@ -16,4 +17,4 @@
   </nav>
 </header>
 
- <router-outlet></router-outlet>
+<router-outlet></router-outlet>

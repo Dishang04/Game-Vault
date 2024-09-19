@@ -1,0 +1,31 @@
+<h1>My games</h1>
+
+<a routerLink="/wishlist"><span class="optionsButton bi bi-check2-circle"></span>Played games</a>
+<a routerLink="/wishlist"><span class="optionsButton bi bi-controller"></span>Currently playing</a>
+<a routerLink="/wishlist"><span class="optionsButton bi bi-heart"></span>Want to play (wishlist)</a>
+
+<!-- <ul class="gamesList">
+    <li class="gameCard" *ngFor="let game of favoriteGames" >
+        <div class="gameCardClickable" [routerLink]="['/detail', game.id]">
+            <h2 class="gameCardHeader">{{game.name}}</h2>
+            <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
+            <p class="gameCardInfo">{{game.genres}}</p>
+            <p class="gameCardInfo">{{game.platform}}</p>
+            <hr class="gameCardLine">
+        </div>
+        <app-favorite 
+            class="favoriteIcon" 
+            [isFavorite]="true" 
+            (favoriteChange)="onFavoriteChange(game, $event)">
+        </app-favorite>
+    </li>
+</ul> -->
+
+<!-- <router-outlet></router-outlet> -->
+
+<!-- CHECKLIST -->
+<!-- 
+searchbar only search for the added games
+categories like platforms, currently playing?
+filter
+ -->

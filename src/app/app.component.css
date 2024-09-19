@@ -1,24 +1,24 @@
 
 *,
 *::before,
-*::after {
+*::after{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
+html{
   font-size: 62.5%;
 }
 
-body {
+body{
   font-weight: 400;
   min-height: 100vh;
   font-size: 1.8rem;
   font-family: "Epilogue", sans-serif;
 }
 
-header {
+header{
   background-color: #333;
   color: #fff;
   width: 100%;
@@ -30,55 +30,37 @@ header {
   z-index: 1000;
 }
 
-nav {
+nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
 }
 
-/* .logo a {
-  font-size: 2rem;
-  color: white;
-  text-decoration: none;
-} */
-
-.nav-links {
+.nav-links{
   display: flex;
   gap: 2rem;
 }
 
-.nav-links a {
+.nav-links a{
   color: white;
   text-decoration: none;
   font-size: 1.8rem;
   padding: 0.3rem 1rem;
   transition: background-color 0.3s ease;
-  /* padding: 1rem; */
 }
 
-
-/* nav a {
-  padding: 1rem;
-  text-decoration: none;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #e8e8e8;
-  color: #3d3d3d;
-  border-radius: 4px;
-} */
-
-nav a:hover {
+nav a:hover{
   color: red;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 5px;
-  /* padding: 1rem; */
-}
-nav a:active {
-  background-color: black;
 }
 
-.hamburger {
+nav a:active{
+  background-color: blue;
+}
+
+.hamburger{
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -98,7 +80,7 @@ nav a:active {
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
-    top: 6rem;
+    top: 0rem;
     right: 0;
     background-color: #333;
     height: 100vh;
@@ -124,7 +106,7 @@ nav a:active {
 
 /* Hamburger Animation */
 .hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(0.5rem, 0.5rem);
+  transform: rotate(45deg) translate(0.65rem, 0.65rem);
 }
 
 .hamburger.active span:nth-child(2) {
