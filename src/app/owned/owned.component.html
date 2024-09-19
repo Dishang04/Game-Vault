@@ -1,20 +1,33 @@
 <!-- ICON FOR ADD OPTIONS -->
-
-<span 
+<!-- <span 
     class="addToButton bi bi-plus-circle"
     [matMenuTriggerFor]="menu">
-</span>
+</span> -->
+
+<div class="tooltip addToButton">
+    <span class="tooltiptext">Add to list</span>
+    <span 
+        class="bi bi-plus-circle"
+        [matMenuTriggerFor]="menu">
+    </span>
+</div>
 
 <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="addToCurrentlyPlaying()">
-        <span class="optionsButton bi bi-controller"></span>
-        Add to currently playing</button>
-    <button mat-menu-item (click)="addToPlayedGames()">
-        <span class="optionsButton bi bi-check2-circle"></span>
-        Add to played/finished games</button>
     <button mat-menu-item (click)="addToMyGames()">
         <span class="optionsButton bi bi-safe2"></span>
-        Add to my games</button>
+        My games
+        <span class="bi bi-check-circle-fill"></span>
+    </button>
+    <button mat-menu-item (click)="addToCurrentlyPlaying()">
+        <span class="optionsButton bi bi-controller"></span>
+        Currently playing
+        <span class="bi bi-circle"></span>
+    </button>
+    <button mat-menu-item (click)="addToPlayedGames()">
+        <span class="optionsButton bi bi-check2-circle"></span>
+        Played games
+        <span class="bi bi-circle"></span>
+    </button>
     <!-- <button mat-menu-item (click)="addToNewCollection()">
         <span class="optionsButton"></span>
         Add to new collection</button> -->
