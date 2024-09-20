@@ -8,13 +8,14 @@
     <span class="tooltiptext">Add to list</span>
     <span 
         class="bi bi-plus-circle"
-        [matMenuTriggerFor]="menu">
+        [matMenuTriggerFor]="menu"
+        [matMenuTriggerRestoreFocus]="false">
     </span>
 </div>
 
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" [overlapTrigger]="false">
     <button mat-menu-item 
-        (click)="addToMyGames()"
+        (click)="addToMyGames(); $event.stopPropagation()"
         [class.bi-check-circle-fill]="isMyGamesAdded"
         [class.bi-circlel]="!isMyGamesAdded">
         <span class="optionsButton bi bi-safe2"></span>
@@ -25,7 +26,7 @@
         </span>
     </button>
     <button mat-menu-item 
-        (click)="addToCurrentlyPlaying()"
+        (click)="addToCurrentlyPlaying(); $event.stopPropagation()"
         [class.bi-check-circle-fill]="isCurrentlyPlayingAdded"
         [class.bi-circle]="!isCurrentlyPlayingAdded">
         <span class="optionsButton bi bi-controller"></span>
@@ -36,7 +37,7 @@
         </span>
     </button>
     <button mat-menu-item 
-        (click)="addToPlayedGames()"
+        (click)="addToPlayedGames(); $event.stopPropagation()"
         [class.bi-check-circle-fill]="isPlayedGamesAdded"
         [class.bi-circle]="!isPlayedGamesAdded">
         <span class="optionsButton bi bi-check2-circle"></span>
