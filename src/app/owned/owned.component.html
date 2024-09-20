@@ -13,25 +13,45 @@
 </div>
 
 <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="addToMyGames()">
+    <button mat-menu-item 
+        (click)="addToMyGames()"
+        [class.bi-check-circle-fill]="isMyGamesAdded"
+        [class.bi-circlel]="!isMyGamesAdded">
         <span class="optionsButton bi bi-safe2"></span>
         My games
-        <span class="bi bi-check-circle-fill"></span>
+        <span [ngClass]="{
+            'bi-check-circle-fill': isMyGamesAdded,
+            'bi-circle': !isMyGamesAdded}">
+        </span>
     </button>
-    <button mat-menu-item (click)="addToCurrentlyPlaying()">
+    <button mat-menu-item 
+        (click)="addToCurrentlyPlaying()"
+        [class.bi-check-circle-fill]="isCurrentlyPlayingAdded"
+        [class.bi-circle]="!isCurrentlyPlayingAdded">
         <span class="optionsButton bi bi-controller"></span>
         Currently playing
-        <span class="bi bi-circle"></span>
+        <span [ngClass]="{
+            'bi-check-circle-fill': isCurrentlyPlayingAdded,
+            'bi-circle': !isCurrentlyPlayingAdded}">
+        </span>
     </button>
-    <button mat-menu-item (click)="addToPlayedGames()">
+    <button mat-menu-item 
+        (click)="addToPlayedGames()"
+        [class.bi-check-circle-fill]="isPlayedGamesAdded"
+        [class.bi-circle]="!isPlayedGamesAdded">
         <span class="optionsButton bi bi-check2-circle"></span>
         Played games
-        <span class="bi bi-circle"></span>
+        <span [ngClass]="{
+            'bi-check-circle-fill': isPlayedGamesAdded,
+            'bi-circle': !isPlayedGamesAdded}">
+        </span>
     </button>
     <!-- <button mat-menu-item (click)="addToNewCollection()">
         <span class="optionsButton"></span>
         Add to new collection</button> -->
-    <button mat-menu-item>
+
+    <!-- ICON TESTS -->
+    <!-- <button mat-menu-item>
         <span class="optionsButton bi bi-safe"></span>
         test</button>
     <button mat-menu-item>
@@ -39,7 +59,7 @@
         test</button>
     <button mat-menu-item>
         <span class="optionsButton bi bi-box2-heart"></span>
-        test</button>
+        test</button> -->
 
     <!-- <button mat-menu-item (click)="addToNewCollection()">Add to new collection</button> -->
     <!-- <button mat-menu-item (click)="addToWishlist()">Add to Wishlist</button> -->

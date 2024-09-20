@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-owned',
@@ -6,21 +6,65 @@ import { Component } from '@angular/core';
   styleUrl: './owned.component.css'
 })
 export class OwnedComponent {
+  @Input() isAdded: boolean = true;
+  @Output() addedChange = new EventEmitter<boolean>();
+
+  isMyGamesAdded: boolean = false;
+  isCurrentlyPlayingAdded: boolean = false;
+  isPlayedGamesAdded: boolean = false;
+
   constructor(){}
 
-  addToCurrentlyPlaying(): void{
-    console.log("currently playing");
+  toggleList(list: string): void {
+    switch (list) {
+      case 'myGames':
+        this.isMyGamesAdded = !this.isMyGamesAdded;
+        break;
+      case 'currentlyPlaying':
+        this.isCurrentlyPlayingAdded = !this.isCurrentlyPlayingAdded;
+        break;
+      case 'playedGames':
+        this.isPlayedGamesAdded = !this.isPlayedGamesAdded;
+        break;
+      default:
+        break;
+    }
   }
 
-  addToPlayedGames(): void{
-    console.log("played games");
+  addToMyGames(): void {
+    this.toggleList('myGames');
+    console.log('Toggled My games');
   }
 
-  addToMyGames(): void{
-    console.log("my playing");
+  addToCurrentlyPlaying(): void {
+    this.toggleList('currentlyPlaying');
+    console.log('Toggled Currently playing');
   }
 
-  addToNewCollection(): void{
-    console.log("new collection");
+  addToPlayedGames(): void {
+    this.toggleList('playedGames');
+    console.log('Toggled Played games');
   }
+
+  // onClick(): void{
+  //   this.isAdded = !this.isAdded;
+  //   this.addedChange.emit(this.isAdded);
+  //   console.log('click test');
+  // }
+
+  // addToCurrentlyPlaying(): void{
+  //   console.log("currently playing");
+  // }
+
+  // addToPlayedGames(): void{
+  //   console.log("played games");
+  // }
+
+  // addToMyGames(): void{
+  //   console.log("my playing");
+  // }
+
+  // addToNewCollection(): void{
+  //   console.log("new collection");
+  // }
 }
