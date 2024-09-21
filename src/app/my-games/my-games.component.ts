@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { OwnedService } from '../owned.service';
 import { Game } from '../game';
-import { FavoriteService } from '../favorite.service';
 
 @Component({
   selector: 'app-my-games',
@@ -8,9 +8,20 @@ import { FavoriteService } from '../favorite.service';
   styleUrl: './my-games.component.css'
 })
 export class MyGamesComponent {
-  // favoriteGames: Game[] = [];
+  ownedGames: Game[] = [];
 
-  // constructor(private favoriteService: FavoriteService){}
+  constructor(private ownedService: OwnedService){}
+
+  ngOnInit(): void{
+    this.ownedGames = this.ownedService.getOwnedGames();
+  }
+
+  onOwnedChange(game: Game, isOwned: boolean): void{
+    if(!isOwned){
+      this.ownedService.removeFromMyGames(game);
+      this.ownedGames = this.ownedService.getOwnedGames();
+    }
+  }
 
   // ngOnInit(): void{
   //   this.favoriteGames = this.favoriteService.getFavoriteGames();
@@ -21,5 +32,5 @@ export class MyGamesComponent {
   //     this.favoriteService.removeFavorite(game);
   //     this.favoriteGames = this.favoriteService.getFavoriteGames();
   //   }
-  // }
+
 }

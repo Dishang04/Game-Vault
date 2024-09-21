@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Game } from '../game';
+import { OwnedService } from '../owned.service';
 
 @Component({
   selector: 'app-owned',
@@ -6,65 +8,30 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrl: './owned.component.css'
 })
 export class OwnedComponent {
-  @Input() isAdded: boolean = true;
-  @Output() addedChange = new EventEmitter<boolean>();
 
-  isMyGamesAdded: boolean = false;
-  isCurrentlyPlayingAdded: boolean = false;
-  isPlayedGamesAdded: boolean = false;
+  @Input() isOwned: boolean = true;
+  @Output() ownedChange = new EventEmitter<boolean>();
 
   constructor(){}
 
-  toggleList(list: string): void {
-    switch (list) {
-      case 'myGames':
-        this.isMyGamesAdded = !this.isMyGamesAdded;
-        break;
-      case 'currentlyPlaying':
-        this.isCurrentlyPlayingAdded = !this.isCurrentlyPlayingAdded;
-        break;
-      case 'playedGames':
-        this.isPlayedGamesAdded = !this.isPlayedGamesAdded;
-        break;
-      default:
-        break;
-    }
+  onClick(): void{
+    this.isOwned = !this.isOwned;
+    this.ownedChange.emit(this.isOwned);
+    console.log("test");
   }
 
-  addToMyGames(): void {
-    this.toggleList('myGames');
-    console.log('Toggled My games');
-  }
 
-  addToCurrentlyPlaying(): void {
-    this.toggleList('currentlyPlaying');
-    console.log('Toggled Currently playing');
-  }
-
-  addToPlayedGames(): void {
-    this.toggleList('playedGames');
-    console.log('Toggled Played games');
-  }
-
-  // onClick(): void{
-  //   this.isAdded = !this.isAdded;
-  //   this.addedChange.emit(this.isAdded);
-  //   console.log('click test');
+  // STILL NEEDS FIGURING OUT 
+  // addToMyGames(): void{
+  //   this.ownedService.addToMyGames(this.game);
+  //   this.isOwned = true;
   // }
 
   // addToCurrentlyPlaying(): void{
-  //   console.log("currently playing");
+  //   this.ownedService.addToCurrentlyPlaying(this.game);
   // }
 
   // addToPlayedGames(): void{
-  //   console.log("played games");
-  // }
-
-  // addToMyGames(): void{
-  //   console.log("my playing");
-  // }
-
-  // addToNewCollection(): void{
-  //   console.log("new collection");
+  //   this.ownedService.addToPlayedGames(this.game);
   // }
 }

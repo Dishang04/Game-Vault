@@ -16,7 +16,9 @@
             [isFavorite]="favoriteService.isFavorite(game)" 
             (favoriteChange)="onFavoriteChange(game, $event)">
         </app-favorite>
-        <app-owned></app-owned>
+        <app-owned
+            [isOwned]="ownedService.isOwned(game)" 
+            (ownedChange)="onOwnedChange(game, $event)"></app-owned>
     </li>
 </ul>
 

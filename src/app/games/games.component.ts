@@ -3,6 +3,7 @@ import { Game } from '../game';
 // import { GAMES } from '../mock-games';
 import { GameService } from '../game.service';
 import { FavoriteService } from '../favorite.service';
+import { OwnedService } from '../owned.service';
 
 @Component({
   selector: 'app-games',
@@ -12,7 +13,7 @@ import { FavoriteService } from '../favorite.service';
 export class GamesComponent implements OnInit {
   games: Game[] = [];
 
-  constructor(private gameService: GameService, public favoriteService: FavoriteService) { }
+  constructor(private gameService: GameService, public favoriteService: FavoriteService, public ownedService: OwnedService) { }
 
   getGames(query: string = ''): void {
     this.gameService.getGames(query).subscribe(games =>{
@@ -30,6 +31,15 @@ export class GamesComponent implements OnInit {
     }
     else{
       this.favoriteService.removeFavorite(game);
+    }
+  }
+
+  onOwnedChange(game: Game, isOwned: boolean): void{
+    if(isOwned){
+      this.ownedService.addToMyGames(game);
+    }
+    else{
+      this.ownedService.removeFromMyGames(game);
     }
   }
 

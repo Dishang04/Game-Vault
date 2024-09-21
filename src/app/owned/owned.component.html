@@ -1,9 +1,4 @@
 <!-- ICON FOR ADD OPTIONS -->
-<!-- <span 
-    class="addToButton bi bi-plus-circle"
-    [matMenuTriggerFor]="menu">
-</span> -->
-
 <div class="tooltip addToButton">
     <span class="tooltiptext">Add to list</span>
     <span 
@@ -15,43 +10,30 @@
 
 <mat-menu #menu="matMenu" [overlapTrigger]="false">
     <button mat-menu-item 
-        (click)="addToMyGames(); $event.stopPropagation()"
-        [class.bi-check-circle-fill]="isMyGamesAdded"
-        [class.bi-circlel]="!isMyGamesAdded">
+    (click)="onClick(); $event.stopPropagation()">
         <span class="optionsButton bi bi-safe2"></span>
         My games
-        <span [ngClass]="{
-            'bi-check-circle-fill': isMyGamesAdded,
-            'bi-circle': !isMyGamesAdded}">
-        </span>
+        <span class="bi bi-circle" 
+        [class.bi-check-circle-fill]="isOwned"
+        [class.bi-circle]="!isOwned"
+        ></span>
     </button>
-    <button mat-menu-item 
-        (click)="addToCurrentlyPlaying(); $event.stopPropagation()"
-        [class.bi-check-circle-fill]="isCurrentlyPlayingAdded"
-        [class.bi-circle]="!isCurrentlyPlayingAdded">
+    <!-- <button mat-menu-item (click)="addToCurrentlyPlaying(); $event.stopPropagation()">
         <span class="optionsButton bi bi-controller"></span>
         Currently playing
-        <span [ngClass]="{
-            'bi-check-circle-fill': isCurrentlyPlayingAdded,
-            'bi-circle': !isCurrentlyPlayingAdded}">
-        </span>
+        <span class="bi bi-check-circle-fill"></span>
     </button>
-    <button mat-menu-item 
-        (click)="addToPlayedGames(); $event.stopPropagation()"
-        [class.bi-check-circle-fill]="isPlayedGamesAdded"
-        [class.bi-circle]="!isPlayedGamesAdded">
+    <button mat-menu-item  (click)="addToPlayedGames(); $event.stopPropagation()">
         <span class="optionsButton bi bi-check2-circle"></span>
         Played games
-        <span [ngClass]="{
-            'bi-check-circle-fill': isPlayedGamesAdded,
-            'bi-circle': !isPlayedGamesAdded}">
-        </span>
-    </button>
+        <span class="bi bi-circle"></span>
+    </button> -->
+
+
+
     <!-- <button mat-menu-item (click)="addToNewCollection()">
         <span class="optionsButton"></span>
         Add to new collection</button> -->
-
-    <!-- ICON TESTS -->
     <!-- <button mat-menu-item>
         <span class="optionsButton bi bi-safe"></span>
         test</button>
