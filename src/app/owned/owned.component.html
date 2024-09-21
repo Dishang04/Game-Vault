@@ -1,37 +1,40 @@
 <!-- ICON FOR ADD OPTIONS -->
-<!-- <span 
-    class="addToButton bi bi-plus-circle"
-    [matMenuTriggerFor]="menu">
-</span> -->
-
 <div class="tooltip addToButton">
     <span class="tooltiptext">Add to list</span>
     <span 
         class="bi bi-plus-circle"
-        [matMenuTriggerFor]="menu">
+        [matMenuTriggerFor]="menu"
+        [matMenuTriggerRestoreFocus]="false">
     </span>
 </div>
 
-<mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="addToMyGames()">
+<mat-menu #menu="matMenu" [overlapTrigger]="false">
+    <button mat-menu-item 
+    (click)="onClick(); $event.stopPropagation()">
         <span class="optionsButton bi bi-safe2"></span>
         My games
-        <span class="bi bi-check-circle-fill"></span>
+        <span class="bi bi-circle" 
+        [class.bi-check-circle-fill]="isOwned"
+        [class.bi-circle]="!isOwned"
+        ></span>
     </button>
-    <button mat-menu-item (click)="addToCurrentlyPlaying()">
+    <!-- <button mat-menu-item (click)="addToCurrentlyPlaying(); $event.stopPropagation()">
         <span class="optionsButton bi bi-controller"></span>
         Currently playing
-        <span class="bi bi-circle"></span>
+        <span class="bi bi-check-circle-fill"></span>
     </button>
-    <button mat-menu-item (click)="addToPlayedGames()">
+    <button mat-menu-item  (click)="addToPlayedGames(); $event.stopPropagation()">
         <span class="optionsButton bi bi-check2-circle"></span>
         Played games
         <span class="bi bi-circle"></span>
-    </button>
+    </button> -->
+
+
+
     <!-- <button mat-menu-item (click)="addToNewCollection()">
         <span class="optionsButton"></span>
         Add to new collection</button> -->
-    <button mat-menu-item>
+    <!-- <button mat-menu-item>
         <span class="optionsButton bi bi-safe"></span>
         test</button>
     <button mat-menu-item>
@@ -39,7 +42,7 @@
         test</button>
     <button mat-menu-item>
         <span class="optionsButton bi bi-box2-heart"></span>
-        test</button>
+        test</button> -->
 
     <!-- <button mat-menu-item (click)="addToNewCollection()">Add to new collection</button> -->
     <!-- <button mat-menu-item (click)="addToWishlist()">Add to Wishlist</button> -->

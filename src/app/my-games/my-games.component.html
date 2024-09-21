@@ -4,6 +4,18 @@
 <a routerLink="/wishlist"><span class="optionsButton bi bi-controller"></span>Currently playing</a>
 <a routerLink="/wishlist"><span class="optionsButton bi bi-heart"></span>Want to play (wishlist)</a>
 
+<ul class="gamesList">
+    <li class="gameCard" *ngFor="let game of ownedGames">
+      <div class="gameCardClickable" [routerLink]="['/detail', game.id]">
+        <h2 class="gameCardHeader">{{ game.name }}</h2>
+        <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
+        <p class="gameCardInfo">{{ game.genres }}</p>
+        <p class="gameCardInfo">{{ game.platform }}</p>
+        <hr class="gameCardLine">
+      </div>
+    </li>
+  </ul>
+
 <!-- <ul class="gamesList">
     <li class="gameCard" *ngFor="let game of favoriteGames" >
         <div class="gameCardClickable" [routerLink]="['/detail', game.id]">

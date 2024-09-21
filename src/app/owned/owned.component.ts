@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Game } from '../game';
+import { OwnedService } from '../owned.service';
 
 @Component({
   selector: 'app-owned',
@@ -6,21 +8,30 @@ import { Component } from '@angular/core';
   styleUrl: './owned.component.css'
 })
 export class OwnedComponent {
+
+  @Input() isOwned: boolean = true;
+  @Output() ownedChange = new EventEmitter<boolean>();
+
   constructor(){}
 
-  addToCurrentlyPlaying(): void{
-    console.log("currently playing");
+  onClick(): void{
+    this.isOwned = !this.isOwned;
+    this.ownedChange.emit(this.isOwned);
+    console.log("test");
   }
 
-  addToPlayedGames(): void{
-    console.log("played games");
-  }
 
-  addToMyGames(): void{
-    console.log("my playing");
-  }
+  // STILL NEEDS FIGURING OUT 
+  // addToMyGames(): void{
+  //   this.ownedService.addToMyGames(this.game);
+  //   this.isOwned = true;
+  // }
 
-  addToNewCollection(): void{
-    console.log("new collection");
-  }
+  // addToCurrentlyPlaying(): void{
+  //   this.ownedService.addToCurrentlyPlaying(this.game);
+  // }
+
+  // addToPlayedGames(): void{
+  //   this.ownedService.addToPlayedGames(this.game);
+  // }
 }
