@@ -7,17 +7,35 @@ import { OwnedService } from '../owned.service';
   templateUrl: './owned.component.html',
   styleUrl: './owned.component.css'
 })
+
 export class OwnedComponent {
 
   @Input() isOwned: boolean = true;
+  @Input() isCurrently: boolean = true;
+  @Input() isPlayed: boolean = true;
   @Output() ownedChange = new EventEmitter<boolean>();
+  @Output() currentlyChange = new EventEmitter<boolean>();
+  @Output() playedChange = new EventEmitter<boolean>();
 
   constructor(){}
 
-  onClick(): void{
+  addToMyGames(): void{
+    console.log("owned");
     this.isOwned = !this.isOwned;
     this.ownedChange.emit(this.isOwned);
-    console.log("test");
+  }
+
+  addToCurrentlyPlaying(): void{
+    console.log("currently");
+    this.isCurrently = !this.isCurrently;
+    this.currentlyChange.emit(this.isCurrently);
+  }
+
+  addToPlayedGames(): void{
+    console.log("played");
+    this.isPlayed = !this.isPlayed;
+    this.playedChange.emit(this.isPlayed);
+
   }
 
 
