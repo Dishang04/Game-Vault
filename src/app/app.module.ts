@@ -22,6 +22,7 @@ import { OwnedComponent } from './owned/owned.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CurrentlyPlayingComponent } from './currently-playing/currently-playing.component';
+import { PlayedGamesComponent } from './played-games/played-games.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CurrentlyPlayingComponent } from './currently-playing/currently-playing
     OwnedComponent,
     WishlistComponent,
     CurrentlyPlayingComponent,
+    PlayedGamesComponent,
   ],
   imports: [
     BrowserModule,
