@@ -11,7 +11,8 @@
 <mat-menu #menu="matMenu" [overlapTrigger]="false">
     <button mat-menu-item 
     (click)="addToMyGames(); $event.stopPropagation()">
-        <span class="optionsButton bi bi-safe2"></span>
+        <span class="optionsButton bi bi-safe2"
+        ></span>
         My games
         <span class="bi bi-circle" 
         [class.bi-check-circle-fill]="isOwned"
