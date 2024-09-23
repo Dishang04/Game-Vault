@@ -10,7 +10,7 @@
 
 <mat-menu #menu="matMenu" [overlapTrigger]="false">
     <button mat-menu-item 
-    (click)=" $event.stopPropagation()">
+    (click)="addToMyGames(); $event.stopPropagation()">
         <span class="optionsButton bi bi-safe2"></span>
         My games
         <span class="bi bi-circle" 
