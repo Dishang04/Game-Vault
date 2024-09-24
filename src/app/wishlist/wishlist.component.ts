@@ -10,7 +10,6 @@ import { OwnedService } from '../owned.service';
 })
 export class WishlistComponent implements OnInit {
   favoriteGames: Game[] = [];
-  ownedGames: Game[] = [];
 
   constructor( public favoriteService: FavoriteService, public ownedService: OwnedService) {}
 
@@ -27,8 +26,10 @@ export class WishlistComponent implements OnInit {
 
   onOwnedChange(game: Game, isOwned: boolean): void{
     if(!isOwned){
-      this.ownedService.removeFromMyGames(game);
-      this.ownedGames = this.ownedService.getOwnedGames();
+      this.ownedService.addToMyGames(game);
+      this.favoriteService.removeFavorite(game);
+      this.favoriteGames = this.favoriteService.getFavoriteGames();
+      // this.ownedGames = this.ownedService.getOwnedGames();
     }
   }
 }

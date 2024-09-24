@@ -9,20 +9,37 @@ import { OwnedService } from '../owned.service';
 })
 
 export class OwnedComponent {
-
+  @Input() game!: Game;
   @Input() isOwned: boolean = true;
+  @Input() isWishlist: boolean = false;
   @Input() isCurrently: boolean = true;
   @Input() isPlayed: boolean = true;
   @Output() ownedChange = new EventEmitter<boolean>();
   @Output() currentlyChange = new EventEmitter<boolean>();
   @Output() playedChange = new EventEmitter<boolean>();
 
-  constructor(){}
+  constructor(private ownedService: OwnedService){}
 
   addToMyGames(): void{
-    console.log("owned");
-    this.isOwned = !this.isOwned;
+    if(!this.isOwned){
+      this.isOwned = false;
+      this.ownedService.removeFromMyGames(this.game);
+      console.log("game removed from my games");
+    }
+    else{
+      this.isOwned = true;
+      this.ownedService.addToMyGames(this.game);
+      console.log("game added to my games");
+    }
+
     this.ownedChange.emit(this.isOwned);
+
+    if(this.isWishlist){
+      this.ownedService.removeFromWishlist(this.game);
+    }
+   
+    // this.isOwned = !this.isOwned;
+    // this.ownedChange.emit(this.isOwned);
   }
 
   addToCurrentlyPlaying(): void{

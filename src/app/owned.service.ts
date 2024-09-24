@@ -6,6 +6,7 @@ import { Game } from './game';
 })
 export class OwnedService {
   private ownedGames: Game[] = [];
+  private wishlistGames: Game[] = [];
   private playingGames: Game[] = [];
   private playedGames: Game[] = [];
 
@@ -14,6 +15,7 @@ export class OwnedService {
   addToMyGames(game: Game): void{
     if(!this.isOwned(game)){
       this.ownedGames.push(game);
+      this.removeFromWishlist(game);
     }
   }
 
@@ -27,6 +29,24 @@ export class OwnedService {
 
   getOwnedGames(): Game[]{
     return this.ownedGames;
+  }
+
+  addToWishlist(game: Game): void{
+    if(!this.isInWishlist(game)){
+      this.wishlistGames.push(game);
+    }
+  }
+
+  removeFromWishlist(game: Game): void{
+    this.wishlistGames = this.wishlistGames.filter(g => g.id !== game.id);
+  }
+
+  isInWishlist(game: Game): boolean{
+    return this.wishlistGames.some(g => g.id === game.id);
+  }
+
+  getWishlistGames(): Game[]{
+    return this.wishlistGames;
   }
 
 
