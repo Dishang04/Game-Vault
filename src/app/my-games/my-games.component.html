@@ -6,13 +6,13 @@
 
 <ul class="gamesList">
     <li class="gameCard" *ngFor="let game of ownedGames">
-      <div class="gameCardClickable" [routerLink]="['/detail', game.id]">
-        <h2 class="gameCardHeader">{{ game.name }}</h2>
-        <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
-        <p class="gameCardInfo">{{ game.genres }}</p>
-        <p class="gameCardInfo">{{ game.platform }}</p>
-        <hr class="gameCardLine">
-      </div>
+      <app-game-card 
+            [game]="game"
+            [isFavorite]="favoriteService.isFavorite(game)"
+            [isOwned]="ownedService.isOwned(game)"
+            (favoriteChange)="onFavoriteChange(game, $event)"
+            (ownedChange)="onOwnedChange(game, $event)">
+        </app-game-card>
     </li>
   </ul>
 

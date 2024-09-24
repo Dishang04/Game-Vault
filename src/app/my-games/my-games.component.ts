@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { OwnedService } from '../owned.service';
+import { FavoriteService } from '../favorite.service';
 import { Game } from '../game';
 
 @Component({
@@ -7,13 +8,22 @@ import { Game } from '../game';
   templateUrl: './my-games.component.html',
   styleUrl: './my-games.component.css'
 })
-export class MyGamesComponent {
+export class MyGamesComponent implements OnInit {
   ownedGames: Game[] = [];
 
-  constructor(private ownedService: OwnedService){}
+  constructor( public favoriteService: FavoriteService, public ownedService: OwnedService) {}
 
   ngOnInit(): void{
     this.ownedGames = this.ownedService.getOwnedGames();
+  }
+
+  onFavoriteChange(game: Game, isFavorite: boolean): void{
+    if(isFavorite){
+      this.favoriteService.addFavorite(game);
+    }
+    else{
+      this.favoriteService.removeFavorite(game);
+    }
   }
 
   onOwnedChange(game: Game, isOwned: boolean): void{
@@ -22,15 +32,4 @@ export class MyGamesComponent {
       this.ownedGames = this.ownedService.getOwnedGames();
     }
   }
-
-  // ngOnInit(): void{
-  //   this.favoriteGames = this.favoriteService.getFavoriteGames();
-  // }
-
-  // onFavoriteChange(game: Game, isFavorite: boolean): void{
-  //   if(!isFavorite){
-  //     this.favoriteService.removeFavorite(game);
-  //     this.favoriteGames = this.favoriteService.getFavoriteGames();
-  //   }
-
 }
