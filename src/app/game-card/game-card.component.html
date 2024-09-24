@@ -1,1 +1,18 @@
-<p>game-card works!</p>
+<div class="gameCardClickable" [routerLink]="['/detail', game.id]">
+    <h2 class="gameCardHeader">{{game.name}}</h2>
+    <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
+    <p class="gameCardInfo">{{game.genres}}</p>
+    <p class="gameCardInfo">{{game.platform}}</p>
+    <hr class="gameCardLine">
+</div>
+  
+<app-favorite 
+    class="favoriteIcon" 
+    [isFavorite]="isFavorite" 
+    (favoriteChange)="onFavoriteToggle()">
+</app-favorite>
+<app-owned
+    class="ownedIcon" 
+    [isOwned]="isOwned" 
+    (ownedChange)="onOwnedToggle()">
+</app-owned>
