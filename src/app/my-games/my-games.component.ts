@@ -27,9 +27,12 @@ export class MyGamesComponent implements OnInit {
   }
 
   onOwnedChange(game: Game, isOwned: boolean): void{
-    if(!isOwned){
-      this.ownedService.removeFromMyGames(game);
-      this.ownedGames = this.ownedService.getOwnedGames();
+    if(isOwned){
+      this.ownedService.addToMyGames(game);
     }
+    else{
+      this.ownedService.removeFromMyGames(game);
+    }
+    this.ownedGames = this.ownedService.getOwnedGames();
   }
 }

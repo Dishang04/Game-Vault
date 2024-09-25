@@ -12,6 +12,7 @@
     (favoriteChange)="onFavoriteToggle()">
 </app-favorite>
 <app-owned
+    [game]="game"
     class="ownedIcon" 
     [isOwned]="isOwned" 
     (ownedChange)="onOwnedToggle()">

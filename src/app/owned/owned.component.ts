@@ -9,18 +9,18 @@ import { OwnedService } from '../owned.service';
 })
 
 export class OwnedComponent {
-
-  @Input() isOwned: boolean = true;
-  @Input() isCurrently: boolean = true;
-  @Input() isPlayed: boolean = true;
+  @Input() game!: Game;
+  @Input() isOwned: boolean = false;
+  @Input() isWishlist: boolean = false;
+  @Input() isCurrently: boolean = false;
+  @Input() isPlayed: boolean = false;
   @Output() ownedChange = new EventEmitter<boolean>();
   @Output() currentlyChange = new EventEmitter<boolean>();
   @Output() playedChange = new EventEmitter<boolean>();
 
-  constructor(){}
+  constructor(private ownedService: OwnedService){}
 
   addToMyGames(): void{
-    console.log("owned");
     this.isOwned = !this.isOwned;
     this.ownedChange.emit(this.isOwned);
   }
