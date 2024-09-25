@@ -25,11 +25,10 @@ export class WishlistComponent implements OnInit {
   }
 
   onOwnedChange(game: Game, isOwned: boolean): void{
-    if(!isOwned){
+    if(isOwned){
       this.ownedService.addToMyGames(game);
       this.favoriteService.removeFavorite(game);
       this.favoriteGames = this.favoriteService.getFavoriteGames();
-      // this.ownedGames = this.ownedService.getOwnedGames();
     }
   }
 }

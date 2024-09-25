@@ -37,11 +37,12 @@ export class GamesComponent implements OnInit {
   onOwnedChange(game: Game, isOwned: boolean): void{
     if(isOwned){
       this.ownedService.addToMyGames(game);
-      this.ownedService.removeFromWishlist(game);
+      this.favoriteService.removeFavorite(game);
     }
     else{
       this.ownedService.removeFromMyGames(game);
     }
+    this.getGames();
   }
 
   ngOnInit(): void {

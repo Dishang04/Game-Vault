@@ -14,6 +14,6 @@ export class FavoriteComponent {
   onClick(): void{
     this.isFavorite = !this.isFavorite;
     this.favoriteChange.emit(this.isFavorite);
-    console.log("test");
+    console.log("added to wishlist");
   }
 }
