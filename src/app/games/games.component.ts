@@ -42,7 +42,16 @@ export class GamesComponent implements OnInit {
     else{
       this.ownedService.removeFromMyGames(game);
     }
-    this.getGames();
+  }
+
+  onCurrentlyChange(game: Game, isCurrently: boolean): void{
+    if(isCurrently){
+      this.ownedService.addToCurrentlyPlaying(game);
+    }
+    else{
+      this.ownedService.removeFromCurrentlyPlaying(game);
+    }
+    this.games = this.games.filter(g => this.ownedService.isCurrently(g));
   }
 
   ngOnInit(): void {

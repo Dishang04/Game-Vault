@@ -15,5 +15,7 @@
     [game]="game"
     class="ownedIcon" 
     [isOwned]="isOwned" 
-    (ownedChange)="onOwnedToggle()">
+    [isCurrently]="isCurrently"
+    (ownedChange)="onOwnedToggle()"
+    (currentlyChange)="onCurrentlyToggle()">
 </app-owned>

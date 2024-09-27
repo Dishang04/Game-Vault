@@ -6,11 +6,11 @@ h1{
 }
 
 .gameImage {
-  width: 100%;  /* Make the image responsive */
-  max-width: 600px;  /* Limit the max width */
+  width: 100%; 
+  max-width: 600px;
   height: auto;
-  border-radius: 10px;  /* Add rounded corners */
-  margin-bottom: 20px;  /* Add space below the image */
+  border-radius: 10px; 
+  margin-bottom: 20px;
 }
 
 button {
