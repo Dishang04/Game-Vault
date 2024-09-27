@@ -20,8 +20,7 @@ export class CurrentlyPlayingComponent implements OnInit{
 
   removeFromCurrentlyPlaying(game: Game): void{
     this.ownedService.removeFromCurrentlyPlaying(game);
-
-    this.playingGames = this.ownedService.getCurrentlyPlaying();
+    this.playingGames = this.playingGames.filter(g => g.id !== game.id);
   }
 
   onFavoriteChange(game: Game, isFavorite: boolean): void{
@@ -43,13 +42,13 @@ export class CurrentlyPlayingComponent implements OnInit{
     this.ownedGames = this.ownedService.getOwnedGames();
   }
 
-  onCurrentlyChange(game: Game, isCurrently: boolean): void{
-    if(isCurrently){
-      this.ownedService.addToCurrentlyPlaying(game);
-    }
+  onCurrentlyChange(game: Game, isCurrently: boolean): void {
+    if(!isCurrently){
+      this.removeFromCurrentlyPlaying(game);
+    } 
     else{
-      this.ownedService.removeFromCurrentlyPlaying(game);
+      this.ownedService.addToCurrentlyPlaying(game);
+      this.playingGames.push(game);
     }
-    this.playingGames = this.ownedService.getCurrentlyPlaying();
   }
 }
