@@ -1,1 +1,13 @@
 <h1>Currently playing</h1>
+
+<ul class="gamesList">
+    <li class="gameCard" *ngFor="let game of playingGames">
+      <app-game-card 
+            [game]="game"
+            [isFavorite]="favoriteService.isFavorite(game)"
+            [isOwned]="ownedService.isOwned(game)"
+            (favoriteChange)="onFavoriteChange(game, $event)"
+            (ownedChange)="onOwnedChange(game, $event)">
+        </app-game-card>
+    </li>
+  </ul>

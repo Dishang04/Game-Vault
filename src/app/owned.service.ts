@@ -12,6 +12,7 @@ export class OwnedService {
 
   constructor() { }
 
+  //MY GAMES
   addToMyGames(game: Game): void{
     if(!this.isOwned(game)){
       this.ownedGames.push(game);
@@ -31,6 +32,8 @@ export class OwnedService {
     return this.ownedGames;
   }
 
+
+  //WISHLIST
   addToWishlist(game: Game): void{
     if(!this.isInWishlist(game)){
       this.wishlistGames.push(game);
@@ -50,14 +53,29 @@ export class OwnedService {
   }
 
 
-
-// STILL NEEDS FIGURING OUT
-
+  //CURRENTLY PLAYING
   addToCurrentlyPlaying(game: Game): void{
-    if(!this.isPlaying(game)){
+    if(!this.isCurrently(game)){
       this.playingGames.push(game);
     }
   }
+  
+  removeFromCurrentlyPlaying(game: Game): void{
+    this.playingGames = this.playingGames.filter(g => g.id !== game.id);
+  }
+
+  isCurrently(game: Game): boolean{
+    return this.playingGames.some(g => g.id === game.id);
+  }
+
+  getCurrentlyPlaying(): Game[]{
+    return this.playingGames;
+  }
+
+
+  
+// STILL NEEDS FIGURING OUT
+
 
   addToPlayedGames(game: Game): void{
     if(!this.isPlayed(game)){
@@ -66,17 +84,8 @@ export class OwnedService {
   }
 
 
-
-  isPlaying(game: Game): boolean{
-    return this.playingGames.some(g => g.id === game.id);
-  }
-
   isPlayed(game: Game): boolean{
     return this.playedGames.some(g => g.id === game.id);
-  }
-
-  getCurrentlyPlayingGames(): Game[]{
-    return this.playingGames;
   }
 
   getPlayedGames(): Game[]{

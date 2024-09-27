@@ -9,8 +9,7 @@
 </div>
 
 <mat-menu #menu="matMenu" [overlapTrigger]="false">
-    <button mat-menu-item 
-    (click)="addToMyGames(); $event.stopPropagation()">
+    <button mat-menu-item (click)="addToMyGames(); $event.stopPropagation()">
         <span class="optionsButton bi bi-safe2"
         ></span>
         My games
@@ -23,15 +22,15 @@
         <span class="optionsButton bi bi-controller"></span>
         Currently playing
         <span class="bi bi-circle"
-        [class.bi-check-circle-fill]="!isCurrently"
-        [class.bi-circle]="isCurrently"></span>
+        [class.bi-check-circle-fill]="isCurrently"
+        [class.bi-circle]="!isCurrently"></span>
     </button>
     <button mat-menu-item (click)="addToPlayedGames(); $event.stopPropagation()">
         <span class="optionsButton bi bi-check2-circle"></span>
         Played games
         <span class="bi bi-circle"
-        [class.bi-check-circle-fill]="!isPlayed"
-        [class.bi-circle]="isPlayed"></span>
+        [class.bi-check-circle-fill]="isPlayed"
+        [class.bi-circle]="!isPlayed"></span>
     </button>
 
 

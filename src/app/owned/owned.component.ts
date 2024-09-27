@@ -8,7 +8,7 @@ import { OwnedService } from '../owned.service';
   styleUrl: './owned.component.css'
 })
 
-export class OwnedComponent {
+export class OwnedComponent{
   @Input() game!: Game;
   @Input() isOwned: boolean = false;
   @Input() isWishlist: boolean = false;
@@ -23,18 +23,36 @@ export class OwnedComponent {
   addToMyGames(): void{
     this.isOwned = !this.isOwned;
     this.ownedChange.emit(this.isOwned);
+
+    if(this.isOwned){
+      this.ownedService.addToMyGames(this.game);
+    }
+    else{
+      this.ownedService.removeFromMyGames(this.game);
+    }
   }
 
   addToCurrentlyPlaying(): void{
     console.log("currently");
     this.isCurrently = !this.isCurrently;
     this.currentlyChange.emit(this.isCurrently);
+
+    if(this.isCurrently){
+      this.ownedService.addToCurrentlyPlaying(this.game);
+    }
+    else{
+      this.ownedService.removeFromCurrentlyPlaying(this.game);
+    }
   }
 
   addToPlayedGames(): void{
     console.log("played");
     this.isPlayed = !this.isPlayed;
     this.playedChange.emit(this.isPlayed);
+
+    if(this.isPlayed){
+      this.ownedService.addToPlayedGames(this.game);
+    }
 
   }
 
