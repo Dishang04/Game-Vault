@@ -2,17 +2,16 @@
 
 <a routerLink="/played-games"><span class="optionsButton bi bi-check2-circle"></span>Played games</a>
 <a routerLink="/currently-playing"><span class="optionsButton bi bi-controller"></span>Currently playing</a>
-<a routerLink="/wishlist"><span class="optionsButton bi bi-heart"></span>Want to play (wishlist)</a>
+<!-- <a routerLink="/wishlist"><span class="optionsButton bi bi-heart"></span>Want to play (wishlist)</a> -->
 
 <ul class="gamesList">
     <li class="gameCard" *ngFor="let game of ownedGames">
-      <app-game-card 
+      <app-my-game-card 
             [game]="game"
-            [isFavorite]="favoriteService.isFavorite(game)"
             [isOwned]="ownedService.isOwned(game)"
             (favoriteChange)="onFavoriteChange(game, $event)"
             (ownedChange)="onOwnedChange(game, $event)">
-        </app-game-card>
+        </app-my-game-card>
     </li>
   </ul>
 

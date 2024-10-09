@@ -1,0 +1,16 @@
+<div class="gameCardClickable" [routerLink]="['/detail', game.id]">
+    <h2 class="gameCardHeader">{{game.name}}</h2>
+    <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
+    <p class="gameCardInfo">{{game.genres}}</p>
+    <p class="gameCardInfo">{{game.platform}}</p>
+    <hr class="gameCardLine">
+</div>
+  
+<app-owned
+    [game]="game"
+    class="ownedIcon" 
+    [isOwned]="isOwned" 
+    [isCurrently]="isCurrently"
+    (ownedChange)="onOwnedToggle()"
+    (currentlyChange)="onCurrentlyToggle()">
+</app-owned>
