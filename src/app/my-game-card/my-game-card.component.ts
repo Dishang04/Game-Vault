@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Game } from '../game';
-import { FavoriteService } from '../favorite.service';
 import { OwnedService } from '../owned.service';
 
 @Component({
@@ -13,9 +12,10 @@ export class MyGameCardComponent implements OnInit{
   @Input() isOwned: boolean = false;
   @Input() isCurrently: boolean = false;
 
-  @Output() favoriteChange = new EventEmitter<boolean>();
   @Output() ownedChange = new EventEmitter<boolean>();
   @Output() currentlyChange = new EventEmitter<boolean>();
+
+  ownedPlatforms: string[] = [];
 
   constructor(public ownedService: OwnedService) {}
 
@@ -32,5 +32,9 @@ export class MyGameCardComponent implements OnInit{
   onCurrentlyToggle(){
     this.isCurrently = !this.isCurrently;
     this.currentlyChange.emit(this.isCurrently);
+  }
+
+  updateOwnedPlatforms(platforms: string[]): void {
+    this.ownedPlatforms = platforms;
   }
 }

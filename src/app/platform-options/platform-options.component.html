@@ -1,0 +1,19 @@
+<!-- ICON FOR PLATFORM OPTIONS -->
+<div class="tooltip platformButton">
+    <span class="tooltiptext">Platform options</span>
+    <span 
+        class="bi bi-laptop"
+        [matMenuTriggerFor]="menu"
+        [matMenuTriggerRestoreFocus]="false">
+    </span>
+</div>
+
+<mat-menu #menu="matMenu" [overlapTrigger]="false">
+    <button mat-menu-item *ngFor="let platform of platforms" (click)="togglePlatformOwnership(platform)">
+        <span class="optionsButton bi bi-circle"
+            [class.bi-check-circle-fill]="ownedPlatforms.includes(platform)"
+            [class.bi-circle]="!ownedPlatforms.includes(platform)">
+        </span>
+        <span>{{ platform }}</span>
+    </button>
+</mat-menu>

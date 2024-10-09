@@ -1,10 +1,16 @@
 <div class="gameCardClickable" [routerLink]="['/detail', game.id]">
     <h2 class="gameCardHeader">{{game.name}}</h2>
     <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
-    <!-- <p class="gameCardInfo">{{game.genres}}</p> -->
     <p class="gameCardInfo">show owned on which platforms {{game.platform}}</p>
     <hr class="gameCardLine">
 </div>
+
+<app-platform-options 
+  class="platformsIcon"
+  [platforms]="game.platform.split(', ')"
+  [ownedPlatforms]="ownedPlatforms"
+  (platformChange)="updateOwnedPlatforms($event)">
+</app-platform-options>
   
 <app-owned
     [game]="game"
