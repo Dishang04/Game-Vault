@@ -61,6 +61,11 @@ body {
   font-size: 18px;
 }
 
+.gameCardInfoPlatforms{
+  font-weight: bold;
+  color: #007bff;
+}
+
 .gameCardLine{
   color: black;
   margin: 0px 20px 15px 20px;

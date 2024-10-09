@@ -1,7 +1,11 @@
 <div class="gameCardClickable" [routerLink]="['/detail', game.id]">
     <h2 class="gameCardHeader">{{game.name}}</h2>
     <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
-    <p class="gameCardInfo">Owned on platform: {{game.platform}}</p>
+    <p class="gameCardInfo">
+      Owned on platform:
+      <span class="gameCardInfoPlatforms" *ngIf="ownedPlatforms.length > 0">{{ ownedPlatforms.join(', ') }}</span>
+      <span class="gameCardInfoPlatforms" *ngIf="ownedPlatforms.length === 0">Not selected</span>
+    </p>
     <hr class="gameCardLine">
 </div>
 

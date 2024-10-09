@@ -33,8 +33,8 @@ export class GameService {
         // description: game.description_raw,
         // released: game.released,
         platform: game.platforms.map((p: any) => p.platform.name).join(', '),
-        // modes: game.tags.map((tag: any) => tag.name).filter((name: string) => 
-        //   name === 'Singleplayer' || name === 'Multiplayer').join(', '),
+        modes: game.tags.map((tag: any) => tag.name).filter((name: string) => 
+          name === 'Singleplayer' || name === 'Multiplayer').join(', '),
         genres: game.genres.map((genre: any) => genre.name).join(', '),
         image: game.background_image,
       })))

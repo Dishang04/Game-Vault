@@ -9,7 +9,7 @@
 </div>
 
 <mat-menu #menu="matMenu" [overlapTrigger]="false">
-    <button mat-menu-item *ngFor="let platform of platforms" (click)="togglePlatformOwnership(platform)">
+    <button mat-menu-item *ngFor="let platform of platforms" (click)="togglePlatformOwnership(platform); $event.stopPropagation()">
         <span class="optionsButton bi bi-circle"
             [class.bi-check-circle-fill]="ownedPlatforms.includes(platform)"
             [class.bi-circle]="!ownedPlatforms.includes(platform)">
