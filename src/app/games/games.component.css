@@ -60,16 +60,7 @@ h1{
 @media screen and (min-width: 1400px){
   .gamesList{
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      /* grid-row-gap: 40px; */
       grid-column-gap: 20px;
       margin-top: 3%;
   }
-
-  /* .gamesList{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-row-gap: 40px;
-    grid-column-gap: 40px;
-    padding: 40px;
-  } */
 }
