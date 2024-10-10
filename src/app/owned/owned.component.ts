@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Game } from '../game';
 import { OwnedService } from '../owned.service';
 
@@ -53,21 +53,9 @@ export class OwnedComponent{
     if(this.isPlayed){
       this.ownedService.addToPlayedGames(this.game);
     }
+    else{
+      this.ownedService.removeFromPlayedGames(this.game);
+    }
 
   }
-
-
-  // STILL NEEDS FIGURING OUT 
-  // addToMyGames(): void{
-  //   this.ownedService.addToMyGames(this.game);
-  //   this.isOwned = true;
-  // }
-
-  // addToCurrentlyPlaying(): void{
-  //   this.ownedService.addToCurrentlyPlaying(this.game);
-  // }
-
-  // addToPlayedGames(): void{
-  //   this.ownedService.addToPlayedGames(this.game);
-  // }
 }

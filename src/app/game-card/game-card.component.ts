@@ -18,7 +18,10 @@ export class GameCardComponent implements OnInit{
   @Output() ownedChange = new EventEmitter<boolean>();
   @Output() currentlyChange = new EventEmitter<boolean>();
 
-  constructor(public favoriteService: FavoriteService, public ownedService: OwnedService) {}
+  constructor(
+    public favoriteService: FavoriteService, 
+    public ownedService: OwnedService
+  ){}
 
   ngOnInit(): void {
     this.isOwned = this.ownedService.isOwned(this.game);

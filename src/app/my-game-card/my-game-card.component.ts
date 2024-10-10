@@ -11,9 +11,11 @@ export class MyGameCardComponent implements OnInit{
   @Input() game!: Game;
   @Input() isOwned: boolean = false;
   @Input() isCurrently: boolean = false;
+  @Input() isPlayed: boolean = false;
 
   @Output() ownedChange = new EventEmitter<boolean>();
   @Output() currentlyChange = new EventEmitter<boolean>();
+  @Output() playedChange = new EventEmitter<boolean>();
 
   ownedPlatforms: string[] = [];
 
@@ -22,6 +24,7 @@ export class MyGameCardComponent implements OnInit{
   ngOnInit(): void {
     this.isOwned = this.ownedService.isOwned(this.game);
     this.isCurrently = this.ownedService.isCurrently(this.game);
+    this.isPlayed = this.ownedService.isPlayed(this.game);
   }
 
   onOwnedToggle() {
@@ -32,6 +35,11 @@ export class MyGameCardComponent implements OnInit{
   onCurrentlyToggle(){
     this.isCurrently = !this.isCurrently;
     this.currentlyChange.emit(this.isCurrently);
+  }
+
+  onPlayedToggle(){
+    this.isPlayed = !this.isPlayed;
+    this.playedChange.emit(this.isPlayed);
   }
 
   updateOwnedPlatforms(platforms: string[]): void {

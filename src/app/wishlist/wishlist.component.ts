@@ -11,7 +11,10 @@ import { OwnedService } from '../owned.service';
 export class WishlistComponent implements OnInit {
   favoriteGames: Game[] = [];
 
-  constructor( public favoriteService: FavoriteService, public ownedService: OwnedService) {}
+  constructor( 
+    public favoriteService: FavoriteService, 
+    public ownedService: OwnedService
+  ){}
 
   ngOnInit(): void{
     this.favoriteGames = this.favoriteService.getFavoriteGames();
