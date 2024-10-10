@@ -8,7 +8,8 @@
     <app-my-game-card 
           [game]="game"
           [isOwned]="ownedService.isOwned(game)"
-          (ownedChange)="onOwnedChange(game, $event)">
+          (ownedChange)="onOwnedChange(game, $event)"
+          >
     </app-my-game-card>
   </li>
 </ul>

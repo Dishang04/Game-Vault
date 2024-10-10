@@ -58,15 +58,15 @@ export class GamesComponent implements OnInit {
     this.games = this.games.filter(g => this.ownedService.isCurrently(g));
   }
 
-  onPlayedChange(game: Game, isPlayed: boolean): void{
-    if(isPlayed){
-      this.ownedService.addToPlayedGames(game);
-    }
-    else{
-      this.ownedService.removeFromPlayedGames(game);
-    }
-    this.games = this.games.filter(g => this.ownedService.isCurrently(g));
-  }
+  // onPlayedChange(game: Game, isPlayed: boolean): void{
+  //   if(isPlayed){
+  //     this.ownedService.addToPlayedGames(game);
+  //   }
+  //   else{
+  //     this.ownedService.removeFromPlayedGames(game);
+  //   }
+  //   this.games = this.games.filter(g => this.ownedService.isCurrently(g));
+  // }
 
   ngOnInit(): void {
     this.getGames();
