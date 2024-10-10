@@ -74,15 +74,16 @@ export class OwnedService {
 
 
   
-// STILL NEEDS FIGURING OUT
-
-
+  //FINISHED GAMES
   addToPlayedGames(game: Game): void{
     if(!this.isPlayed(game)){
       this.playedGames.push(game);
     }
   }
 
+  removeFromPlayedGames(game: Game): void{
+    this.playedGames = this.playedGames.filter(g => g.id !== game.id);
+  }
 
   isPlayed(game: Game): boolean{
     return this.playedGames.some(g => g.id === game.id);

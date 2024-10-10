@@ -24,6 +24,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { CurrentlyPlayingComponent } from './currently-playing/currently-playing.component';
 import { PlayedGamesComponent } from './played-games/played-games.component';
 import { GameCardComponent } from './game-card/game-card.component';
+import { MyGameCardComponent } from './my-game-card/my-game-card.component';
+import { PlatformOptionsComponent } from './platform-options/platform-options.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { GameCardComponent } from './game-card/game-card.component';
     CurrentlyPlayingComponent,
     PlayedGamesComponent,
     GameCardComponent,
+    MyGameCardComponent,
+    PlatformOptionsComponent,
   ],
   imports: [
     BrowserModule,

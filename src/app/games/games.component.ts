@@ -13,7 +13,11 @@ import { OwnedService } from '../owned.service';
 export class GamesComponent implements OnInit {
   games: Game[] = [];
 
-  constructor(private gameService: GameService, public favoriteService: FavoriteService, public ownedService: OwnedService) {}
+  constructor(
+    private gameService: GameService, 
+    public favoriteService: FavoriteService, 
+    public ownedService: OwnedService
+  ){}
 
   getGames(query: string = ''): void {
     this.gameService.getGames(query).subscribe(games =>{
@@ -53,6 +57,16 @@ export class GamesComponent implements OnInit {
     }
     this.games = this.games.filter(g => this.ownedService.isCurrently(g));
   }
+
+  // onPlayedChange(game: Game, isPlayed: boolean): void{
+  //   if(isPlayed){
+  //     this.ownedService.addToPlayedGames(game);
+  //   }
+  //   else{
+  //     this.ownedService.removeFromPlayedGames(game);
+  //   }
+  //   this.games = this.games.filter(g => this.ownedService.isCurrently(g));
+  // }
 
   ngOnInit(): void {
     this.getGames();

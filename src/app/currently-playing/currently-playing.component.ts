@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OwnedService } from '../owned.service';
 import { FavoriteService } from '../favorite.service';
 import { Game } from '../game';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-currently-playing',
@@ -12,7 +13,11 @@ export class CurrentlyPlayingComponent implements OnInit{
   playingGames: Game[] = [];
   ownedGames: Game[] = [];
 
-  constructor( public favoriteService: FavoriteService, public ownedService: OwnedService) {}
+  constructor( 
+    public favoriteService: FavoriteService, 
+    public ownedService: OwnedService, 
+    private location: Location
+  ){}
 
   ngOnInit(): void{
     this.playingGames = this.ownedService.getCurrentlyPlaying();
@@ -50,5 +55,9 @@ export class CurrentlyPlayingComponent implements OnInit{
       this.ownedService.addToCurrentlyPlaying(game);
       this.playingGames.push(game);
     }
+  }
+
+  goBack(): void{
+    this.location.back();
   }
 }

@@ -1,20 +1,18 @@
 <h1>My games</h1>
 
-<a routerLink="/played-games"><span class="optionsButton bi bi-check2-circle"></span>Played games</a>
-<a routerLink="/currently-playing"><span class="optionsButton bi bi-controller"></span>Currently playing</a>
-<a routerLink="/wishlist"><span class="optionsButton bi bi-heart"></span>Want to play (wishlist)</a>
+<a class="playedBtn" routerLink="/played-games"><span class="optionsButton bi bi-check2-circle"></span>Finished games</a>
+<a class="currentlyBtn" routerLink="/currently-playing"><span class="optionsButton bi bi-controller"></span>Currently playing</a>
 
 <ul class="gamesList">
-    <li class="gameCard" *ngFor="let game of ownedGames">
-      <app-game-card 
-            [game]="game"
-            [isFavorite]="favoriteService.isFavorite(game)"
-            [isOwned]="ownedService.isOwned(game)"
-            (favoriteChange)="onFavoriteChange(game, $event)"
-            (ownedChange)="onOwnedChange(game, $event)">
-        </app-game-card>
-    </li>
-  </ul>
+  <li class="gameCard" *ngFor="let game of ownedGames">
+    <app-my-game-card 
+          [game]="game"
+          [isOwned]="ownedService.isOwned(game)"
+          (ownedChange)="onOwnedChange(game, $event)"
+          >
+    </app-my-game-card>
+  </li>
+</ul>
 
 <!-- <router-outlet></router-outlet> -->
 

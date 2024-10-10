@@ -1,36 +1,30 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Game } from '../game';
-import { FavoriteService } from '../favorite.service';
 import { OwnedService } from '../owned.service';
 
 @Component({
-  selector: 'app-game-card',
-  templateUrl: './game-card.component.html',
-  styleUrl: './game-card.component.css'
+  selector: 'app-my-game-card',
+  templateUrl: './my-game-card.component.html',
+  styleUrl: './my-game-card.component.css'
 })
-export class GameCardComponent implements OnInit{
+export class MyGameCardComponent implements OnInit{
   @Input() game!: Game;
-  @Input() isFavorite: boolean = false;
   @Input() isOwned: boolean = false;
   @Input() isCurrently: boolean = false;
+  @Input() isPlayed: boolean = false;
 
-  @Output() favoriteChange = new EventEmitter<boolean>();
   @Output() ownedChange = new EventEmitter<boolean>();
   @Output() currentlyChange = new EventEmitter<boolean>();
+  @Output() playedChange = new EventEmitter<boolean>();
 
-  constructor(
-    public favoriteService: FavoriteService, 
-    public ownedService: OwnedService
-  ){}
+  ownedPlatforms: string[] = [];
+
+  constructor(public ownedService: OwnedService) {}
 
   ngOnInit(): void {
     this.isOwned = this.ownedService.isOwned(this.game);
     this.isCurrently = this.ownedService.isCurrently(this.game);
-  }
-
-  onFavoriteToggle() {
-    this.isFavorite = !this.isFavorite;
-    this.favoriteChange.emit(this.isFavorite);
+    this.isPlayed = this.ownedService.isPlayed(this.game);
   }
 
   onOwnedToggle() {
@@ -41,5 +35,14 @@ export class GameCardComponent implements OnInit{
   onCurrentlyToggle(){
     this.isCurrently = !this.isCurrently;
     this.currentlyChange.emit(this.isCurrently);
+  }
+
+  // onPlayedToggle(){
+  //   this.isPlayed = !this.isPlayed;
+  //   this.playedChange.emit(this.isPlayed);
+  // }
+
+  updateOwnedPlatforms(platforms: string[]): void {
+    this.ownedPlatforms = platforms;
   }
 }

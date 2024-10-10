@@ -2,6 +2,7 @@
     <h2 class="gameCardHeader">{{game.name}}</h2>
     <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
     <p class="gameCardInfo">{{game.genres}}</p>
+    <p class="gameCardInfo">Game Modes: {{ game.modes ? game.modes : 'Unknown' }}</p>
     <p class="gameCardInfo">{{game.platform}}</p>
     <hr class="gameCardLine">
 </div>
