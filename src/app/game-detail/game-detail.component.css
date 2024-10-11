@@ -1,11 +1,74 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-weight: 400;
+  min-height: 100vh;
+  font-size: 1.8rem;
+  font-family: "Epilogue", sans-serif;
+}
+
+.infoPage{
+  /* width: 90%; */
+  margin: 15px;
+}
+
+.previous{
+  margin-top: 90px;
+  background-color: #a0c1b9;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  border: none;
+}
+
+.previous:hover{
+  background-color: #70a0af;
+  color: white;
+  cursor: pointer;
+}
+
 h1{
   text-align: center;
   font-weight: 400;
-  margin-top: 100px;
+  margin-top: 10px;
   font-size: 32px;
 }
 
-.gameImage {
+.gridContainer{
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 10px;
+}
+
+.sectionHeader{
+  font-size: 26px;
+}
+
+.saveOptions{
+  margin-bottom: 20px;
+  background-color: purple;
+}
+
+.wishlistButton{
+  margin-left: 20px;
+}
+
+.optionsButton{
+  float: right;
+  margin-right: 30px;
+}
+
+.tags{
+  background-color: red;
+}
+
+.gameImage{
   width: 100%; 
   max-width: 600px;
   height: auto;
@@ -13,20 +76,38 @@ h1{
   margin-bottom: 20px;
 }
 
-button {
-  margin-top: 20px;
-  background-color: #eee;
-  padding: 1rem;
-  border-radius: 4px;
-  font-size: 1rem;
+@media screen and (min-width: 800px){
+  .gridContainer{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "header1 header1 header1 header2"
+      "main main main sidebar";
+  }
+  .img{
+    grid-area: header1;
+  }
+  .saveOptions{
+    grid-area: header2;
+  }
+  .description{
+    grid-area: main;
+    padding: 10px;
+  }
+  .tags{
+    grid-area: sidebar;
+    padding: 10px;
+  }
 }
 
-button:hover {
-  background-color: #cfd8dc;
+@media screen and (min-width: 1200px){
+  .gameImage{ 
+    max-width: 800px;
+  }
 }
-  
-button:disabled {
-  background-color: #eee;
-  color: #ccc;
-  cursor: auto;
+
+@media screen and (min-width: 1400px){
+  .gameImage{ 
+    max-width: 1000px;
+  }
 }
