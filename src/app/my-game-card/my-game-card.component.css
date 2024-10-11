@@ -75,3 +75,9 @@ body {
   float: left;
   margin-left: 20px;
 }
+
+.ownedIcon{
+  float: right;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}

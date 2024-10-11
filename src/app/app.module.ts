@@ -1,3 +1,4 @@
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule} from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -54,6 +55,7 @@ import { PlatformOptionsComponent } from './platform-options/platform-options.co
     BrowserAnimationsModule,
     MatSelectModule,
     MatMenuModule,
+    MatTabsModule,
   ],
   providers: [
     provideClientHydration(),
