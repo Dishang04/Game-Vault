@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class CurrentlyPlayingComponent implements OnInit{
   playingGames: Game[] = [];
   ownedGames: Game[] = [];
+  playedGames: Game[] = [];
 
   constructor( 
     public favoriteService: FavoriteService, 
@@ -26,6 +27,11 @@ export class CurrentlyPlayingComponent implements OnInit{
   removeFromCurrentlyPlaying(game: Game): void{
     this.ownedService.removeFromCurrentlyPlaying(game);
     this.playingGames = this.playingGames.filter(g => g.id !== game.id);
+  }
+
+  removeFromPlayedGames(game: Game): void{
+    this.ownedService.removeFromPlayedGames(game);
+    this.playedGames = this.playedGames.filter(g => g.id !== game.id);
   }
 
   onFavoriteChange(game: Game, isFavorite: boolean): void{
@@ -54,6 +60,16 @@ export class CurrentlyPlayingComponent implements OnInit{
     else{
       this.ownedService.addToCurrentlyPlaying(game);
       this.playingGames.push(game);
+    }
+  }
+
+  onPlayedChange(game: Game, isPlayed: boolean): void{
+    if(!isPlayed){
+      this.removeFromPlayedGames(game);
+    }
+    else{
+      this.ownedService.addToPlayedGames(game);
+      this.playedGames.push(game);
     }
   }
 

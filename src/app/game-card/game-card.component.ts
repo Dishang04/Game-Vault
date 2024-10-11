@@ -13,10 +13,12 @@ export class GameCardComponent implements OnInit{
   @Input() isFavorite: boolean = false;
   @Input() isOwned: boolean = false;
   @Input() isCurrently: boolean = false;
+  @Input() isPlayed: boolean = false;
 
   @Output() favoriteChange = new EventEmitter<boolean>();
   @Output() ownedChange = new EventEmitter<boolean>();
   @Output() currentlyChange = new EventEmitter<boolean>();
+  @Output() playedChange = new EventEmitter<boolean>();
 
   constructor(
     public favoriteService: FavoriteService, 
@@ -41,5 +43,10 @@ export class GameCardComponent implements OnInit{
   onCurrentlyToggle(){
     this.isCurrently = !this.isCurrently;
     this.currentlyChange.emit(this.isCurrently);
+  }
+
+  onPlayedToggle(){
+    this.isPlayed = !this.isPlayed;
+    this.playedChange.emit(this.isPlayed);
   }
 }
