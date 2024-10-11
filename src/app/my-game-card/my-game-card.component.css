@@ -13,33 +13,13 @@ body {
   font-family: "Epilogue", sans-serif;
 }
 
-.gamesList{
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-row-gap: 40px;
-  grid-column-gap: 40px;
-  padding: 40px;
-}
-
-.gameCard{
-  list-style: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-}
-
 .gameCardClickable{
   cursor: pointer;
 }
 
-.gameCard:hover{
-  transform: translateY(-10px);
-  transition: 0.2s all;
-  box-shadow: 0 14px 8px 0 rgba(0, 0, 0, 0.3);
-}
-
 .gameCardHeader{
   font-size: 24px;
-  background-color: blue;
+  background-color: #70a0af;
   text-align: center;
   color: white;
   padding: 10px 20px;
@@ -63,7 +43,7 @@ body {
 
 .gameCardInfoPlatforms{
   font-weight: bold;
-  color: #007bff;
+  color: #70a0af;
 }
 
 .gameCardLine{

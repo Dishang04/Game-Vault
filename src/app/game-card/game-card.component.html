@@ -1,25 +1,30 @@
-<div class="gameCardClickable" [routerLink]="['/detail', game.id]">
-    <h2 class="gameCardHeader">{{game.name}}</h2>
-    <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
-    <p class="gameCardInfo">{{game.genres}}</p>
-    <p class="gameCardInfo">Game Modes: {{ game.modes ? game.modes : 'Unknown' }}</p>
-    <p class="gameCardInfo">{{game.platform}}</p>
-    <hr class="gameCardLine">
-</div>
-  
-<app-favorite 
-    class="favoriteIcon" 
-    [isFavorite]="isFavorite" 
-    (favoriteChange)="onFavoriteToggle()">
-</app-favorite>
+<div class="gameCard">
+    <div class="gameCardClickable" [routerLink]="['/detail', game.id]">
+        <h2 class="gameCardHeader">{{game.name}}</h2>
+        <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
+        <p class="gameCardInfo">{{game.genres}}</p>
+        <p class="gameCardInfo">Game Modes: {{ game.modes ? game.modes : 'Unknown' }}</p>
+        <p class="gameCardInfo">{{game.platform}}</p>
+    </div>
 
-<app-owned
-    [game]="game"
-    class="ownedIcon" 
-    [isOwned]="isOwned" 
-    [isCurrently]="isCurrently"
-    [isPlayed]="isPlayed"
-    (ownedChange)="onOwnedToggle()"
-    (currentlyChange)="onCurrentlyToggle()"
-    (playedChange)="onPlayedToggle()">
-</app-owned>
+    <hr class="gameCardLine">
+    
+    <div class="gameCardFooter">
+        <app-favorite 
+            class="favoriteIcon" 
+            [isFavorite]="isFavorite" 
+            (favoriteChange)="onFavoriteToggle()">
+        </app-favorite>
+
+        <app-owned
+            [game]="game"
+            class="ownedIcon" 
+            [isOwned]="isOwned" 
+            [isCurrently]="isCurrently"
+            [isPlayed]="isPlayed"
+            (ownedChange)="onOwnedToggle()"
+            (currentlyChange)="onCurrentlyToggle()"
+            (playedChange)="onPlayedToggle()">
+        </app-owned>
+    </div>
+</div>

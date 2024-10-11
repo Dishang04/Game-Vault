@@ -20,7 +20,7 @@ body {
 
 .previous{
   margin-top: 90px;
-  background-color: #f1f1f1;
+  background-color: #a0c1b9;
   padding: 1rem;
   border-radius: 5px;
   font-size: 1rem;
@@ -28,7 +28,8 @@ body {
 }
 
 .previous:hover{
-  background-color: #ddd;
+  background-color: #70a0af;
+  color: white;
   cursor: pointer;
 }
 
@@ -39,10 +40,14 @@ h1{
   font-size: 32px;
 }
 
-.grid{
+.gridContainer{
   display: grid;
   grid-template-columns: 1fr;
   padding: 10px;
+}
+
+.sectionHeader{
+  font-size: 26px;
 }
 
 .saveOptions{
@@ -72,11 +77,11 @@ h1{
 }
 
 @media screen and (min-width: 800px){
-  .grid{
+  .gridContainer{
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
-      "header1 header1 header header2"
+      "header1 header1 header1 header2"
       "main main main sidebar";
   }
   .img{
@@ -95,10 +100,14 @@ h1{
   }
 }
 
-/* @media screen and (min-width: 1200px){
-
+@media screen and (min-width: 1200px){
+  .gameImage{ 
+    max-width: 800px;
+  }
 }
 
 @media screen and (min-width: 1400px){
-
-} */
+  .gameImage{ 
+    max-width: 1000px;
+  }
+}

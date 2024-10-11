@@ -3,7 +3,7 @@
     <h1>{{game.name}}</h1>
    
     <!-- <p [innerHTML]="game.description || 'No description available'"></p> -->
-    <div class="grid">  
+    <div class="gridContainer">  
       <section class="saveOptions">
         <app-favorite class="wishlistButton"></app-favorite>
         <app-owned class="optionsButton"></app-owned>
@@ -13,12 +13,14 @@
       </section>
     
       <section class="description">
+        <h2 class="sectionHeader">About</h2>
         <p>{{game.description}}</p>    
       <!-- @if(game.description) {
           <p>{{game.description}}</p>
       } -->
       </section>
       <section class="tags">
+        <h2 class="sectionHeader">Tags</h2>
         <p>Genres: {{game.genres}}</p>
         <p>Game Modes: {{ game.modes ? game.modes : 'Unknown' }}</p>
         <p>Developer: {{game.developers}}</p>
