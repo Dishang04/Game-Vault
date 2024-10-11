@@ -14,6 +14,7 @@ export class OwnedComponent{
   @Input() isWishlist: boolean = false;
   @Input() isCurrently: boolean = false;
   @Input() isPlayed: boolean = false;
+
   @Output() ownedChange = new EventEmitter<boolean>();
   @Output() currentlyChange = new EventEmitter<boolean>();
   @Output() playedChange = new EventEmitter<boolean>();
@@ -56,6 +57,5 @@ export class OwnedComponent{
     else{
       this.ownedService.removeFromPlayedGames(this.game);
     }
-
   }
 }

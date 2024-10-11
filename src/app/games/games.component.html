@@ -8,8 +8,10 @@
             [game]="game"
             [isFavorite]="favoriteService.isFavorite(game)"
             [isOwned]="ownedService.isOwned(game)"
+            [isPlayed]="ownedService.isPlayed(game)"
             (favoriteChange)="onFavoriteChange(game, $event)"
-            (ownedChange)="onOwnedChange(game, $event)">
+            (ownedChange)="onOwnedChange(game, $event)"
+            (playedChange)="onPlayedChange(game, $event)">
         </app-game-card>
     </li>
 </ul>

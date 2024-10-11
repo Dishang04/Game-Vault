@@ -21,6 +21,8 @@
     class="ownedIcon" 
     [isOwned]="isOwned" 
     [isCurrently]="isCurrently"
+    [isPlayed]="isPlayed"
     (ownedChange)="onOwnedToggle()"
-    (currentlyChange)="onCurrentlyToggle()">
+    (currentlyChange)="onCurrentlyToggle()"
+    (playedChange)="onPlayedToggle()">
 </app-owned>

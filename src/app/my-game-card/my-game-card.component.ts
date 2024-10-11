@@ -37,10 +37,10 @@ export class MyGameCardComponent implements OnInit{
     this.currentlyChange.emit(this.isCurrently);
   }
 
-  // onPlayedToggle(){
-  //   this.isPlayed = !this.isPlayed;
-  //   this.playedChange.emit(this.isPlayed);
-  // }
+  onPlayedToggle(){
+    this.isPlayed = !this.isPlayed;
+    this.playedChange.emit(this.isPlayed);
+  }
 
   updateOwnedPlatforms(platforms: string[]): void {
     this.ownedPlatforms = platforms;

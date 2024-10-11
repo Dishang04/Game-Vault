@@ -7,7 +7,11 @@
       <app-my-game-card 
           [game]="game"
           [isOwned]="ownedService.isOwned(game)"
-          (ownedChange)="onOwnedChange(game, $event)">
+          [isCurrently]="ownedService.isCurrently(game)"
+          [isPlayed]="ownedService.isPlayed(game)"
+          (ownedChange)="onOwnedChange(game, $event)"
+          (currentlyChange)="onCurrentlyChange(game, $event)"
+          (playedChange)="onPlayedChange(game, $event)">
       </app-my-game-card>
     </li>
   </ul>
