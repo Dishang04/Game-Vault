@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { OwnedService } from '../owned.service';
-// import { FavoriteService } from '../favorite.service';
 import { Game } from '../game';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-my-games',
@@ -10,24 +10,25 @@ import { Game } from '../game';
 })
 export class MyGamesComponent implements OnInit {
   ownedGames: Game[] = [];
+  filteredGames: Game[] = [];
 
-  constructor(
-    // public favoriteService: FavoriteService,
-    public ownedService: OwnedService
-  ){}
+  constructor(public ownedService: OwnedService){}
 
   ngOnInit(): void{
     this.ownedGames = this.ownedService.getOwnedGames();
+    this.filteredGames = [...this.ownedGames];
   }
 
-  // onFavoriteChange(game: Game, isFavorite: boolean): void{
-  //   if(isFavorite){
-  //     this.favoriteService.addFavorite(game);
-  //   }
-  //   else{
-  //     this.favoriteService.removeFavorite(game);
-  //   }
-  // }
+  onFilterChange(selectedGenres: string[]): void{
+    if(selectedGenres.includes('all') || selectedGenres.length === 0){
+      this.filteredGames = [...this.ownedGames];
+    }
+    else{
+      this.filteredGames = this.ownedGames.filter(game => 
+        selectedGenres.some(genre => game.genres.toLowerCase().includes(genre.toLowerCase()))
+      );
+    }
+  }
 
   onOwnedChange(game: Game, isOwned: boolean): void{
     if(isOwned){
@@ -37,5 +38,6 @@ export class MyGamesComponent implements OnInit {
       this.ownedService.removeFromMyGames(game);
     }
     this.ownedGames = this.ownedService.getOwnedGames();
+    this.filteredGames = [...this.ownedGames];
   }
 }
