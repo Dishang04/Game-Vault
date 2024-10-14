@@ -1,12 +1,12 @@
 <h1>My games</h1>
 
-<a class="playedBtn" routerLink="/played-games"><span class="optionsButton bi bi-check2-circle"></span>Finished games</a>
-<a class="currentlyBtn" routerLink="/currently-playing"><span class="optionsButton bi bi-controller"></span>Currently playing</a>
+<!-- <a class="playedBtn" routerLink="/played-games"><span class="optionsButton bi bi-check2-circle"></span>Finished games</a>
+<a class="currentlyBtn" routerLink="/currently-playing"><span class="optionsButton bi bi-controller"></span>Currently playing</a> -->
 
-
-<mat-form-field appearance="fill">
-  <mat-label>Filter by Genre</mat-label>
-  <mat-select >
+<div class="gridFilter">
+<mat-form-field class="filterButton" appearance="fill">
+  <mat-label>Genre</mat-label>
+  <mat-select multiple (selectionChange)="genreFilterChange($event.value)">
     <mat-option value="all">All</mat-option>
     <mat-option value="action">Action</mat-option>
     <mat-option value="adventure">Adventure</mat-option>
@@ -16,20 +16,29 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
-  <mat-label>Filter by Mode</mat-label>
-  <mat-select >
+<mat-form-field class="filterButton" appearance="fill">
+  <mat-label>Game Modes</mat-label>
+  <mat-select multiple (selectionChange)="modeFilterChange($event.value)">
     <mat-option value="all">All</mat-option>
-    <mat-option value="action">Action</mat-option>
-    <mat-option value="adventure">Adventure</mat-option>
-    <mat-option value="rpg">RPG</mat-option>
-    <mat-option value="shooter">Shooter</mat-option>
-    <mat-option value="strategy">Strategy</mat-option>
+    <mat-option value="singleplayer">Singleplayer</mat-option>
+    <mat-option value="multiplayer">Multiplayer</mat-option>
   </mat-select>
 </mat-form-field>
+
+<mat-form-field class="filterButton" appearance="fill">
+  <mat-label>Platform</mat-label>
+  <mat-select multiple (selectionChange)="platformFilterChange($event.value)">
+    <mat-option value="all">All</mat-option>
+    <mat-option value="pc">PC</mat-option>
+    <mat-option value="ps5">PlayStation 5</mat-option>
+    <mat-option value="xbox">Xbox</mat-option>
+    <mat-option value="switch">Nintendo Switch</mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
 
 <ul class="gamesList">
-  <li class="gameCard" *ngFor="let game of ownedGames">
+  <li class="gameCard" *ngFor="let game of filteredGames">
     <app-my-game-card 
           [game]="game"
           [isOwned]="ownedService.isOwned(game)"
