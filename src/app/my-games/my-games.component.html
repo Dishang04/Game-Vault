@@ -4,14 +4,25 @@
 <a class="currentlyBtn" routerLink="/currently-playing"><span class="optionsButton bi bi-controller"></span>Currently playing</a>
 
 <mat-form-field appearance="fill">
-  <mat-label>Filter by Genre ..</mat-label>
-  <mat-select multiple (selectionChange)="onFilterChange($event.value)">
+  <mat-label>Filter by Genre</mat-label>
+  <mat-select multiple (selectionChange)="genreFilterChange($event.value)">
     <mat-option value="all">All</mat-option>
     <mat-option value="action">Action</mat-option>
     <mat-option value="adventure">Adventure</mat-option>
     <mat-option value="rpg">RPG</mat-option>
     <mat-option value="shooter">Shooter</mat-option>
     <mat-option value="strategy">Strategy</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Filter by Platform</mat-label>
+  <mat-select multiple (selectionChange)="platformFilterChange($event.value)">
+    <mat-option value="all">All</mat-option>
+    <mat-option value="pc">PC</mat-option>
+    <mat-option value="ps5">PlayStation 5</mat-option>
+    <mat-option value="xbox">Xbox</mat-option>
+    <mat-option value="switch">Nintendo Switch</mat-option>
   </mat-select>
 </mat-form-field>
 

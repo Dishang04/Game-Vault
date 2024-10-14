@@ -11,6 +11,8 @@ import { filter } from 'rxjs';
 export class MyGamesComponent implements OnInit {
   ownedGames: Game[] = [];
   filteredGames: Game[] = [];
+  selectedGenres: string[] = [];
+  selectedPlatforms: string[] = [];
 
   constructor(public ownedService: OwnedService){}
 
@@ -19,15 +21,33 @@ export class MyGamesComponent implements OnInit {
     this.filteredGames = [...this.ownedGames];
   }
 
-  onFilterChange(selectedGenres: string[]): void{
+  genreFilterChange(selectedGenres: string[]): void{
     if(selectedGenres.includes('all') || selectedGenres.length === 0){
-      this.filteredGames = [...this.ownedGames];
+      this.selectedGenres = [];
     }
     else{
-      this.filteredGames = this.ownedGames.filter(game => 
-        selectedGenres.some(genre => game.genres.toLowerCase().includes(genre.toLowerCase()))
-      );
+      this.selectedGenres = selectedGenres;
     }
+    this.applyFilters();
+  }
+
+  platformFilterChange(selectedPlatforms: string[]): void{
+    if(selectedPlatforms.includes('all') || selectedPlatforms.length === 0){
+      this.selectedPlatforms = [];
+    }
+    else{
+      this.selectedPlatforms = selectedPlatforms;
+    }
+    this.applyFilters();
+  }
+
+  applyFilters(): void{
+    this.filteredGames = this.ownedGames.filter(game => {
+      const matchesGenres = this.selectedGenres.length === 0 || this.selectedGenres.some(genre => game.genres.toLowerCase().includes(genre.toLowerCase()));
+      const matchesPlatforms = this.selectedPlatforms.length === 0 || this.selectedPlatforms.some(platform => game.platform.toLowerCase().includes(platform.toLowerCase()));
+
+      return matchesGenres && matchesPlatforms;
+    })
   }
 
   onOwnedChange(game: Game, isOwned: boolean): void{
