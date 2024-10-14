@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { OwnedService } from '../owned.service';
 import { Game } from '../game';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-my-games',
@@ -13,6 +12,7 @@ export class MyGamesComponent implements OnInit {
   filteredGames: Game[] = [];
   selectedGenres: string[] = [];
   selectedPlatforms: string[] = [];
+  selectedModes: string[] = [];
 
   constructor(public ownedService: OwnedService){}
 
@@ -31,6 +31,16 @@ export class MyGamesComponent implements OnInit {
     this.applyFilters();
   }
 
+  modeFilterChange(selectedModes: string[]): void{
+    if(selectedModes.includes('all') || selectedModes.length === 0){
+      this.selectedModes = [];
+    }
+    else{
+      this.selectedModes = selectedModes;
+    }
+    this.applyFilters();
+  }
+
   platformFilterChange(selectedPlatforms: string[]): void{
     if(selectedPlatforms.includes('all') || selectedPlatforms.length === 0){
       this.selectedPlatforms = [];
@@ -44,9 +54,10 @@ export class MyGamesComponent implements OnInit {
   applyFilters(): void{
     this.filteredGames = this.ownedGames.filter(game => {
       const matchesGenres = this.selectedGenres.length === 0 || this.selectedGenres.some(genre => game.genres.toLowerCase().includes(genre.toLowerCase()));
+      const matchesModes = this.selectedModes.length === 0 || this.selectedModes.some(mode => game.modes.toLowerCase().includes(mode.toLowerCase()));
       const matchesPlatforms = this.selectedPlatforms.length === 0 || this.selectedPlatforms.some(platform => game.platform.toLowerCase().includes(platform.toLowerCase()));
 
-      return matchesGenres && matchesPlatforms;
+      return matchesGenres && matchesModes && matchesPlatforms;
     })
   }
 
