@@ -18,6 +18,17 @@ h2{
     text-align: center;
     margin-top: 5px;
 }
+
+.gridFilter{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 40px;
+    margin: 20px 40px;
+}
+
+.mat-select {
+    color: #ffffff;
+}
   
 .gamesList{
     display: grid;
@@ -53,7 +64,7 @@ h2{
         margin-top: 2%;
     }
 }
-  
+
 @media screen and (min-width: 1200px){
     .gridFilter{
         grid-template-columns: 1fr 1fr 1fr 1fr;
