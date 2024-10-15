@@ -37,7 +37,35 @@
 </mat-form-field>
 </div>
 
-<ul class="gamesList">
+<mat-tab-group>
+  <mat-tab label="All games">
+    <ng-template matTabContent>
+      <h2>All games</h2>
+      <ul class="gamesList">
+        <li class="gameCard" *ngFor="let game of filteredGames">
+          <app-my-game-card 
+                [game]="game"
+                [isOwned]="ownedService.isOwned(game)"
+                (ownedChange)="onOwnedChange(game, $event)"
+                >
+          </app-my-game-card>
+        </li>
+      </ul>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Currently playing">
+    <ng-template matTabContent>
+      <app-currently-playing></app-currently-playing>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Finised games">
+    <ng-template matTabContent>
+      <app-played-games></app-played-games>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+<!-- <ul class="gamesList">
   <li class="gameCard" *ngFor="let game of filteredGames">
     <app-my-game-card 
           [game]="game"
@@ -46,7 +74,7 @@
           >
     </app-my-game-card>
   </li>
-</ul>
+</ul> -->
 
 <!-- <router-outlet></router-outlet> -->
 

@@ -27,6 +27,7 @@ import { PlayedGamesComponent } from './played-games/played-games.component';
 import { GameCardComponent } from './game-card/game-card.component';
 import { MyGameCardComponent } from './my-game-card/my-game-card.component';
 import { PlatformOptionsComponent } from './platform-options/platform-options.component';
+import { AllGamesComponent } from './all-games/all-games.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { PlatformOptionsComponent } from './platform-options/platform-options.co
     GameCardComponent,
     MyGameCardComponent,
     PlatformOptionsComponent,
+    AllGamesComponent,
   ],
   imports: [
     BrowserModule,

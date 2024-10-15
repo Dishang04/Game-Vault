@@ -13,11 +13,10 @@ body {
   font-family: "Epilogue", sans-serif;
 }
 
-h1{
+h2{
+  font-size: 28px;
   text-align: center;
-  font-weight: 400;
-  margin-top: 100px;
-  font-size: 32px;
+  margin-top: 5px;
 }
 
 .playedBtn, .currentlyBtn{

@@ -53,6 +53,12 @@ h1{
   color: #ffffff;
 }
 
+h2{
+  font-size: 28px;
+  text-align: center;
+  margin-top: 5px;
+}
+
 .gamesList{
   display: grid;
   grid-template-columns: 1fr;

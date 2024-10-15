@@ -1,0 +1,11 @@
+<h2>All games</h2>
+
+<ul class="gamesList">
+    <li class="gameCard" *ngFor="let game of filteredGames">
+        <app-my-game-card 
+            [game]="game"
+            [isOwned]="ownedService.isOwned(game)"
+            (ownedChange)="onOwnedChange(game, $event)">
+        </app-my-game-card>
+    </li>
+</ul>
