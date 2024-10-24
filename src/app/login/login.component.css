@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-weight: 400;
+  min-height: 100vh;
+  font-size: 1.8rem;
+  font-family: "Epilogue", sans-serif;
+}
+
+h1{
+    text-align: center;
+    font-weight: 400;
+    margin-top: 60px;
+    font-size: 32px;
+  }
