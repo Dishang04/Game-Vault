@@ -72,8 +72,4 @@ export class CurrentlyPlayingComponent implements OnInit{
       this.playedGames.push(game);
     }
   }
-
-  goBack(): void{
-    this.location.back();
-  }
 }
