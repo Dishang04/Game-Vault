@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from "@angular/forms";
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule} from '@angular/material/select';
@@ -28,6 +29,8 @@ import { GameCardComponent } from './game-card/game-card.component';
 import { MyGameCardComponent } from './my-game-card/my-game-card.component';
 import { PlatformOptionsComponent } from './platform-options/platform-options.component';
 import { AllGamesComponent } from './all-games/all-games.component';
+import { AuthComponent } from './auth/auth.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,8 @@ import { AllGamesComponent } from './all-games/all-games.component';
     MyGameCardComponent,
     PlatformOptionsComponent,
     AllGamesComponent,
+    AuthComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +63,7 @@ import { AllGamesComponent } from './all-games/all-games.component';
     MatSelectModule,
     MatMenuModule,
     MatTabsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     provideClientHydration(),
