@@ -36,7 +36,7 @@ export class LoginComponent {
         .set('username', email)
         .set('password', password);
 
-      this.http.post('http://localhost:8001/token', body, {
+      this.http.post('http://localhost:8000/token', body, {
         headers: new HttpHeaders({
           'Content-Type': 'application/x-www-form-urlencoded'
         })
@@ -45,7 +45,7 @@ export class LoginComponent {
         console.log("succesful response");
         localStorage.setItem('accessToken', response.access_token);
 
-          this.http.post('http://localhost:8001/user', { email: email }).subscribe(
+          this.http.post('http://localhost:8000/user', { email: email }).subscribe(
             (user: any) => {
               this.userStorageService.setUser(user);
               this.userService.setUserData(user);

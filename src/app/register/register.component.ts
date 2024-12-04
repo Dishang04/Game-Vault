@@ -22,7 +22,7 @@ export class RegisterComponent {
       const user: User = form.value;
       console.log("Form daga:", user);
       
-      this.http.post('http://localhost:8001/new_user', user, {
+      this.http.post('http://localhost:8000/new_user', user, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })

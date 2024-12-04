@@ -39,7 +39,7 @@ export class OwnedService {
       }
 
 
-      this.http.post('http://localhost:8001/addmygame', gameData).subscribe(
+      this.http.post('http://localhost:8000/addmygame', gameData).subscribe(
         (response: any) => {
           console.log('User data retrieved successfully:', response);
           this.ownedGames = response;
@@ -64,7 +64,7 @@ export class OwnedService {
   getOwnedGames(): Game[]{
     const user = this.userStorageService.getUser();
     
-    this.http.post('http://localhost:8001/mygames', { email: user.email }).subscribe(
+    this.http.post('http://localhost:8000/mygames', { email: user.email }).subscribe(
       (response: any) => {
         console.log('User data retrieved successfully:', response);
         this.ownedGames = response;
