@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { GameCardComponent } from './game-card/game-card.component';
 import { MyGameCardComponent } from './my-game-card/my-game-card.component';
 import { PlatformOptionsComponent } from './platform-options/platform-options.component';
 import { AllGamesComponent } from './all-games/all-games.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -46,11 +49,14 @@ import { AllGamesComponent } from './all-games/all-games.component';
     MyGameCardComponent,
     PlatformOptionsComponent,
     AllGamesComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
     MatTooltipModule,

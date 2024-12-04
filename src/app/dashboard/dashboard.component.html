@@ -1,8 +1,13 @@
 <h1>Home</h1>
-<p>Login</p>
-<p>Register</p>
-<!-- <div class="games-menu">
-    <a *ngFor="let game of games" routerLink="/detail/{{game.id}}">
-        {{game.name}}
-    </a>
-</div> -->
+
+<div *ngIf="isLoggedIn">
+    <p>Welcome {{ firstname }}</p>
+    <button (click)="logout()">Logout</button>
+</div>
+
+<div *ngIf="!isLoggedIn">
+    <button [routerLink]="['/login']">Login</button>
+    <button [routerLink]="['/register']">Register</button>
+</div>
+
+<router-outlet></router-outlet>

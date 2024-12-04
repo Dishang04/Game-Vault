@@ -13,6 +13,7 @@ class UserCreate(BaseModel):
         from_orm = True
 
 class User(BaseModel):
+    id: int
     firstname: str
     lastname: str
     email: str
@@ -23,8 +24,17 @@ class User(BaseModel):
     class Config:
         from_orm = True
 
-class UserInDB(User):
+class UserInDB(BaseModel):
     hashed_password: str
+    firstname: str
+    lastname: str
+    email: str
+    admin: bool = False
+    active: bool = True
+    
+    
+    class Config:
+        from_orm = True
 
 class UserUpdate(BaseModel):
     email: str
@@ -39,9 +49,17 @@ class EmailRequest(BaseModel):
     email: str
     
 class Game(BaseModel):
-    name: str
     platforms: List[str] = []
+    user_id: int
+    game_id: int
+    platform_name: str
 
     class Config:
         from_orm = True
 
+class NewGame(BaseModel):
+    user_id: int
+    game_id: int
+
+    class Config:
+        from_orm = True

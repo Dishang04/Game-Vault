@@ -1,1 +1,24 @@
-<button (click)="login()" class="btn btn-primary">Login with Google</button>
+<h2>Login</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <small>Email is required and must be valid.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+        <!-- <div ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <small>Password is required and must be at least 6 characters long.</small>
+        </div> -->
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+
+    <div *ngIf="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+    </div>
+</form>

@@ -22,6 +22,7 @@ export class OwnedComponent{
   constructor(private ownedService: OwnedService){}
 
   addToMyGames(): void{
+    console.log("myGames");
     this.isOwned = !this.isOwned;
     this.ownedChange.emit(this.isOwned);
 

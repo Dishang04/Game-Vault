@@ -13,7 +13,9 @@ router = APIRouter()
 # Working 
 @router.post("/new_user")
 async def create_new_user(newuser: schemas.UserCreate, db: Session = Depends(get_db)):
+    print("In the backend")
     user = schemas.UserInDB(
+        id= 0,
         firstname= newuser.firstname,
         lastname = newuser.lastname,
         email= newuser.email.lower(),
@@ -29,6 +31,7 @@ async def create_new_user(newuser: schemas.UserCreate, db: Session = Depends(get
     else:
         user_crud.create_user(db=db, user=user)
         return {"message": f"User succesfully made, welcome {newuser.firstname}"}
+
     
 @router.put("/updateuser", response_model=schemas.User)
 def update_user(user_update: schemas.UserUpdate, db: Session = Depends(get_db)):

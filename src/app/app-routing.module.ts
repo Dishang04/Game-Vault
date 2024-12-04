@@ -7,6 +7,8 @@ import { MyGamesComponent } from './my-games/my-games.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CurrentlyPlayingComponent } from './currently-playing/currently-playing.component';
 import { PlayedGamesComponent } from './played-games/played-games.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path: 'wishlist', component: WishlistComponent},
   {path: 'currently-playing', component: CurrentlyPlayingComponent},
   {path: 'played-games', component: PlayedGamesComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

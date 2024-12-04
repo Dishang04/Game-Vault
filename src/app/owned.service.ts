@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Game } from './game';
+import { GameService } from './game.service';
+import { UserService } from './user.service';
+import { UserStorageService } from './user-storage.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +14,42 @@ export class OwnedService {
   private wishlistGames: Game[] = [];
   private playingGames: Game[] = [];
   private playedGames: Game[] = [];
+  userData: any;
 
-  constructor() { }
+  constructor(
+    private gameService: GameService, 
+    private userService: UserService, 
+    private userStorageService: UserStorageService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   //MY GAMES
   addToMyGames(game: Game): void{
+    console.log("test");
     if(!this.isOwned(game)){
+      const user = this.userStorageService.getUser();
+
       this.ownedGames.push(game);
       this.removeFromWishlist(game);
+
+      const gameData = {
+        user_id: user.id,
+        game_id: game.id
+      }
+
+
+      this.http.post('http://localhost:8001/addmygame', gameData).subscribe(
+        (response: any) => {
+          console.log('User data retrieved successfully:', response);
+          this.ownedGames = response;
+        },
+        (error) => {
+          console.error('Error fetching owned games data:', error);
+        }
+      );
+
+      // toevoegen aan backend /addmygame met game info
     }
   }
 
@@ -29,14 +62,27 @@ export class OwnedService {
   }
 
   getOwnedGames(): Game[]{
+    const user = this.userStorageService.getUser();
+    
+    this.http.post('http://localhost:8001/mygames', { email: user.email }).subscribe(
+      (response: any) => {
+        console.log('User data retrieved successfully:', response);
+        this.ownedGames = response;
+      },
+      (error) => {
+        console.error('Error fetching owned games data:', error);
+      }
+    );
     return this.ownedGames;
   }
 
 
-  //WISHLIST
+//  //WISHLIST
   addToWishlist(game: Game): void{
     if(!this.isInWishlist(game)){
-      this.wishlistGames.push(game);
+    //   this.wishlistGames.push(game);
+
+  // toevoegen aan backend /addwishlist
     }
   }
 
@@ -71,7 +117,6 @@ export class OwnedService {
   getCurrentlyPlaying(): Game[]{
     return this.playingGames;
   }
-
 
   
   //FINISHED GAMES
