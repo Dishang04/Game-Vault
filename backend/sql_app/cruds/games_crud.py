@@ -12,17 +12,20 @@ def check_if_added(db: Session, game: schemas.Game):
     If it is, return the existing game. If not, add it to the table and return the new game.
     """
     db_game = db.query(models.Added).filter(models.Added.owner_id == game.user_id and models.Added.game_id == game.game_id).first()
-
+    print("check succesful")
     if not db_game:
         db_game = models.Added(
-            game_id=game.id,
-            game_name=game.name,
+            game_id=game.game_id,
             owner_id=game.user_id  
         )
+        print("created db_game")
         db.add(db_game)
+        print("add db_game")
         db.commit()
+        print("db commit")
         db.refresh(db_game)
-    
+        print("db refresh")
+    print("Succesfully added to database")
     return db_game
 
 def check_all_deleted(db: Session, game_id: int, user_id: int):
@@ -71,9 +74,14 @@ def add_my_game(db: Session, game: schemas.Game):
     return my_game
 
 def get_my_games(db: Session, user_id: int):
-    return db.query(models.MyGames).join(models.Added).filter(
+    return db.query(models.Added).filter(
         models.Added.owner_id == user_id
     ).all()
+
+# def get_my_games(db: Session, user_id: int):
+#     return db.query(models.MyGames).join(models.MyGames.added_game).filter(
+#         models.Added.owner_id == user_id
+#     ).all()
 
 def find_my_game(db: Session, game_id: int, user_id: int):
     return db.query(models.MyGames).join(models.Added).filter(

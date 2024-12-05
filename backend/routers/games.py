@@ -21,24 +21,44 @@ def check_all_deleted(db: Session, game: schemas.Game):
 
 @router.post("/addmygame")
 async def add_my_game(newgame: schemas.NewGame, db: Session = Depends(get_db)):
+    print("Reached the backend")
     game = schemas.Game(
         platforms= [],
         user_id= newgame.user_id,
         game_id= newgame.game_id,
         platform_name= ""
     )
-    game_existing = games_crud.find_my_game(db=db, game_id=game.game_id, user_id=newgame.user_id)
-    game_in_wishlist = games_crud.find_wishlist_game(db=db, game_id=game.game_id, user_id=newgame.user_id)
-        
-    if not game_existing:
-        if game_in_wishlist:
-            games_crud.delete_from_wishlist(db=db, wishlist_gameid=game.game_id, user_id=game.user_id)
+    # game_existing = games_crud.find_my_game(db=db, game_id=game.game_id, user_id=newgame.user_id)
+    # print ("game_existing works")
 
-        added_game = games_crud.check_if_added(db=db, game=game)
-        if games_crud.add_my_game(db=db, game=added_game):
-            return {"message": f"Succesfully added!"}
+    # game_in_wishlist = games_crud.find_wishlist_game(db=db, game_id=game.game_id, user_id=newgame.user_id)
+    # print ("game_in_wishlist works")
+
+    # if not game_existing:
+    #     if game_in_wishlist:
+    #         print("it came here but it shouldn't")
+    #         games_crud.delete_from_wishlist(db=db, wishlist_gameid=game.game_id, user_id=game.user_id)
+
+    #     added_game = games_crud.check_if_added(db=db, game=game)
+    #     print("It should be working now")
+    #     # if games_crud.add_my_game(db=db, game=added_game):
+    #     #     return {"message": f"Succesfully added!"}
+    #     if added_game:
+    #         return {"message": f"Succesfully added!"}
+    #     else:
+    #         raise HTTPException(status_code=403, detail="Game could not be added")
     
-    raise HTTPException(status_code=403, detail="Game could not be added")
+    added_game = games_crud.check_if_added(db=db, game=game)
+    print("It should be working now")
+    # if games_crud.add_my_game(db=db, game=added_game):
+    #     return {"message": f"Succesfully added!"}
+    if added_game:
+        return {"message": f"Succesfully added!"}
+    else:
+        raise HTTPException(status_code=403, detail="Game could not be added")
+        
+
+
 
 @router.post("/addwishlist")
 def add_to_wishlist(newgame: schemas.NewGame, db: Session = Depends(get_db)):
@@ -171,7 +191,10 @@ async def delete_platform(game: schemas.Game, db: Session = Depends(get_db)):
 @router.post("/mygames", response_model=schemas.Game)
 async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):
     current_user = user_crud.get_user_by_email(db=db, email=email_request.email)
+    print(current_user.id)
+
     my_games = games_crud.get_my_games(db=db, user_id=current_user.id)
+    print("succesfully gotten games")
     return my_games
 
 

@@ -11,9 +11,13 @@ h1{
 
 /* h2 {
     text-align: center;
-  }
+} */
+
+.logout{
+  padding: 10px 25px;
+}
   
-  .games-menu {
+  /* .games-menu {
     padding: 0;
     margin: auto;
     max-width: 1000px;

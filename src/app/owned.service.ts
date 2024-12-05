@@ -38,8 +38,8 @@ export class OwnedService {
         game_id: game.id
       }
 
-
-      this.http.post('http://localhost:8000/addmygame', gameData).subscribe(
+      this.http.post('http://localhost:8000/addmygame', gameData
+    ).subscribe(
         (response: any) => {
           console.log('User data retrieved successfully:', response);
           this.ownedGames = response;

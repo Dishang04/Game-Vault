@@ -1,8 +1,8 @@
 <h1>Home</h1>
 
 <div *ngIf="isLoggedIn">
-    <p>Welcome {{ firstname }}</p>
-    <button (click)="logout()">Logout</button>
+    <h2>Welcome {{ firstname }}</h2>
+    <button class="logout" (click)="logout()">Logout</button>
 </div>
 
 <div *ngIf="!isLoggedIn">
