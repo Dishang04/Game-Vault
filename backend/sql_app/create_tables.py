@@ -13,7 +13,7 @@ def drop_tables():
 
 def main():
     drop_tables()
-    # create_tables()
+    create_tables()
 
 if __name__ == "__main__":
     main()

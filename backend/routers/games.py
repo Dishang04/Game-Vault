@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from typing import Annotated
+from typing import Annotated, List
 
 from sqlalchemy.orm import Session
 from sql_app.database import get_db
@@ -49,12 +49,16 @@ async def add_my_game(newgame: schemas.NewGame, db: Session = Depends(get_db)):
     #         raise HTTPException(status_code=403, detail="Game could not be added")
     
     added_game = games_crud.check_if_added(db=db, game=game)
-    print("It should be working now")
+    print("It should be in added now")
     # if games_crud.add_my_game(db=db, game=added_game):
     #     return {"message": f"Succesfully added!"}
     if added_game:
+        games_crud.add_my_game(db=db, game=game)
+        print("added game to mygames")
         return {"message": f"Succesfully added!"}
+    
     else:
+
         raise HTTPException(status_code=403, detail="Game could not be added")
         
 
@@ -188,14 +192,18 @@ async def delete_platform(game: schemas.Game, db: Session = Depends(get_db)):
 
 # Get
 
-@router.post("/mygames", response_model=schemas.Game)
+@router.post("/mygames", response_model=List[schemas.ReturnGame])
 async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):
     current_user = user_crud.get_user_by_email(db=db, email=email_request.email)
     print(current_user.id)
 
     my_games = games_crud.get_my_games(db=db, user_id=current_user.id)
     print("succesfully gotten games")
-    return my_games
+    
+    print(my_games[0].id, my_games[0].owner_id, len(my_games))
+    print(my_games[0].game_id)
+    print([schemas.ReturnGame.from_orm(game) for game in my_games])
+    return [schemas.ReturnGame.from_orm(game) for game in my_games]
 
 
 @router.post("/mycurrent", response_model=schemas.Game)

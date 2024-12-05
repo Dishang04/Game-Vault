@@ -63,3 +63,10 @@ class NewGame(BaseModel):
 
     class Config:
         from_orm = True
+
+class ReturnGame(BaseModel):
+    game_id: int
+
+    class Config:
+        from_orm = True
+        from_attributes = True

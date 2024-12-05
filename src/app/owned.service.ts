@@ -42,10 +42,12 @@ export class OwnedService {
     ).subscribe(
         (response: any) => {
           console.log('User data retrieved successfully:', response);
-          this.ownedGames = response;
+          // this.ownedGames = response;
+          this.ownedGames = Array.isArray(response) ? response : []; // Ensure it's an array
         },
         (error) => {
           console.error('Error fetching owned games data:', error);
+          this.ownedGames = [];
         }
       );
 
@@ -58,6 +60,11 @@ export class OwnedService {
   }
 
   isOwned(game: Game): boolean{
+    // return this.ownedGames.some(g => g.id === game.id);
+    if (!Array.isArray(this.ownedGames)) {
+      console.error('ownedGames is not an array:', this.ownedGames);
+      return false;
+    }
     return this.ownedGames.some(g => g.id === game.id);
   }
 

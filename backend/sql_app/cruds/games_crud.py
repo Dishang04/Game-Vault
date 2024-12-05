@@ -64,12 +64,14 @@ def delete_added_game(db: Session, added_game_id: int):
 # My Games
 
 def add_my_game(db: Session, game: schemas.Game):
-    db_game = get_added_game_info(game)
-    
+    db_game = get_added_game_info(db=db, game=game)
+    print("gotten added game info")
+
     my_game = models.MyGames(added_game_id=db_game.id)
 
     db.add(my_game)
     db.commit()
+    print("added game to mygames")
     db.refresh(my_game)
     return my_game
 

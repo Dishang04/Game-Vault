@@ -31,7 +31,7 @@ export class RegisterComponent {
           console.log('User registered successfully:', response);
 
           this.userService.setUserData(user);
-          this.router.navigate(['/games']);
+          this.router.navigate(['/dashboard']);
         },
         (error) => {
           console.error('Error registering user:', error);
