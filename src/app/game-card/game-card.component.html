@@ -1,5 +1,5 @@
 <div class="gameCard">
-    <div class="gameCardClickable" [routerLink]="['/detail', game.id]">
+    <div class="gameCardClickable" [routerLink]="['/detail', game.game_id]">
         <h2 class="gameCardHeader">{{game.name}}</h2>
         <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
         <p class="gameCardInfo">{{game.genres}}</p>

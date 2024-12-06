@@ -1,32 +1,39 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import and_, func
 
 from . import schemas
 from sql_app import models
 
 # Added games
 
-def check_if_added(db: Session, game: schemas.Game):
-    """
-    Check if a game is already added to the 'Added' table.
-    If it is, return the existing game. If not, add it to the table and return the new game.
-    """
-    db_game = db.query(models.Added).filter(models.Added.owner_id == game.user_id and models.Added.game_id == game.game_id).first()
-    print("check succesful")
-    if not db_game:
-        db_game = models.Added(
-            game_id=game.game_id,
-            owner_id=game.user_id  
-        )
-        print("created db_game")
-        db.add(db_game)
-        print("add db_game")
-        db.commit()
-        print("db commit")
-        db.refresh(db_game)
-        print("db refresh")
-    print("Succesfully added to database")
+def add_game(db: Session, game: schemas.Game):
+    print("user %s", game.user_id)
+    print("game %s", game.game_id)
+    db_game = models.Added(
+        game_id=game.game_id,
+        owner_id=game.user_id  
+    )
+    db.add(db_game)
+    db.commit()
+    db.refresh(db_game)
     return db_game
+
+
+def game_exists(db: Session, game: schemas.Game):
+    print("game id %s", game.game_id)
+    print("user id %s", game.user_id)
+    q = db.query(models.Added).filter( and_(models.Added.game_id.like(game.game_id) , models.Added.owner_id.like(game.user_id)))
+    # match = db.query(q.all()).scalar()
+
+    matches = db.query(models.Added).filter( and_(models.Added.game_id.like(game.game_id) , models.Added.owner_id.like(game.user_id))).first()
+    print(matches)
+    # print("Match is %s", matches.game_id)
+    # print("Match is %s", matches.owner_id)
+
+    # exists = db.query(q.exists()).scalar()
+    # print("Exists is %s", exists)
+    return matches is not None
+
 
 def check_all_deleted(db: Session, game_id: int, user_id: int):
     my_games = db.query(models.MyGames).join(models.Added).filter(

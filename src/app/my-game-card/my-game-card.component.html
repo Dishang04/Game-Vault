@@ -1,4 +1,4 @@
-<div class="gameCardClickable" [routerLink]="['/detail', game.id]">
+<div class="gameCardClickable" [routerLink]="['/detail', game.game_id]">
     <h2 class="gameCardHeader">{{game.name}}</h2>
     <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
     <p class="gameCardInfo">
@@ -9,12 +9,12 @@
     <hr class="gameCardLine">
 </div>
 
-<app-platform-options 
+<!-- <app-platform-options 
   class="platformsIcon"
   [platforms]="game.platform.split(', ')"
   [ownedPlatforms]="ownedPlatforms"
   (platformChange)="updateOwnedPlatforms($event)">
-</app-platform-options>
+</app-platform-options> -->
   
 <app-owned
     [game]="game"

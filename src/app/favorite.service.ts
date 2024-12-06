@@ -16,11 +16,11 @@ export class FavoriteService {
   }
 
   removeFavorite(game: Game): void{
-    this.favoriteGames = this.favoriteGames.filter(g => g.id !== game.id);
+    this.favoriteGames = this.favoriteGames.filter(g => g.game_id !== game.game_id);
   }
 
   isFavorite(game: Game): boolean{
-    return this.favoriteGames.some(g => g.id === game.id);
+    return this.favoriteGames.some(g => g.game_id === game.game_id);
   }
 
   getFavoriteGames(): Game[]{

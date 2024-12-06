@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { UserStorageService } from './user-storage.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { catchError, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,11 +36,10 @@ export class OwnedService {
 
       const gameData = {
         user_id: user.id,
-        game_id: game.id
+        game_id: game.game_id
       }
 
-      this.http.post('http://localhost:8000/addmygame', gameData
-    ).subscribe(
+      this.http.post('http://localhost:8000/addmygame', gameData).subscribe(
         (response: any) => {
           console.log('User data retrieved successfully:', response);
           // this.ownedGames = response;
@@ -56,7 +56,7 @@ export class OwnedService {
   }
 
   removeFromMyGames(game: Game): void{
-    this.ownedGames = this.ownedGames.filter(g => g.id !== game.id);
+    this.ownedGames = this.ownedGames.filter(g => g.game_id !== game.game_id);
   }
 
   isOwned(game: Game): boolean{
@@ -65,22 +65,13 @@ export class OwnedService {
       console.error('ownedGames is not an array:', this.ownedGames);
       return false;
     }
-    return this.ownedGames.some(g => g.id === game.id);
+    return this.ownedGames.some(g => g.game_id === game.game_id);
   }
 
-  getOwnedGames(): Game[]{
+  getOwnedGames(): Observable<Game[]>{
     const user = this.userStorageService.getUser();
     
-    this.http.post('http://localhost:8000/mygames', { email: user.email }).subscribe(
-      (response: any) => {
-        console.log('User data retrieved successfully:', response);
-        this.ownedGames = response;
-      },
-      (error) => {
-        console.error('Error fetching owned games data:', error);
-      }
-    );
-    return this.ownedGames;
+    return this.http.post<Game[]>('http://localhost:8000/mygames', { email: user.email })
   }
 
 
@@ -94,11 +85,11 @@ export class OwnedService {
   }
 
   removeFromWishlist(game: Game): void{
-    this.wishlistGames = this.wishlistGames.filter(g => g.id !== game.id);
+    this.wishlistGames = this.wishlistGames.filter(g => g.game_id !== game.game_id);
   }
 
   isInWishlist(game: Game): boolean{
-    return this.wishlistGames.some(g => g.id === game.id);
+    return this.wishlistGames.some(g => g.game_id === game.game_id);
   }
 
   getWishlistGames(): Game[]{
@@ -114,11 +105,11 @@ export class OwnedService {
   }
   
   removeFromCurrentlyPlaying(game: Game): void{
-    this.playingGames = this.playingGames.filter(g => g.id !== game.id);
+    this.playingGames = this.playingGames.filter(g => g.game_id !== game.game_id);
   }
 
   isCurrently(game: Game): boolean{
-    return this.playingGames.some(g => g.id === game.id);
+    return this.playingGames.some(g => g.game_id === game.game_id);
   }
 
   getCurrentlyPlaying(): Game[]{
@@ -134,11 +125,11 @@ export class OwnedService {
   }
 
   removeFromPlayedGames(game: Game): void{
-    this.playedGames = this.playedGames.filter(g => g.id !== game.id);
+    this.playedGames = this.playedGames.filter(g => g.game_id !== game.game_id);
   }
 
   isPlayed(game: Game): boolean{
-    return this.playedGames.some(g => g.id === game.id);
+    return this.playedGames.some(g => g.game_id === game.game_id);
   }
 
   getPlayedGames(): Game[]{

@@ -1,3 +1,4 @@
+import { filter, map, Observable } from 'rxjs';
 import { Component, OnInit} from '@angular/core';
 import { OwnedService } from '../owned.service';
 import { Game } from '../game';
@@ -8,19 +9,33 @@ import { Game } from '../game';
   styleUrl: './all-games.component.css'
 })
 export class AllGamesComponent implements OnInit{
-  ownedGames: Game[] = [];
+  ownedGames$: Observable<Game[]>;
+  filteredGames$: Observable<Game[]>;
 
-  filteredGames: Game[] = [];
   selectedGenres: string[] = [];
   selectedPlatforms: string[] = [];
   selectedModes: string[] = [];
 
-  constructor(public ownedService: OwnedService){}
+  constructor(public ownedService: OwnedService){
+    this.ownedGames$ = this.ownedService.getOwnedGames();
+
+    this.filteredGames$ = this.ownedGames$.pipe(
+      map((games) => {
+        return games.filter((game) => {
+          const matchesGenres = this.selectedGenres.length === 0 || this.selectedGenres.some(genre => game.genres.toLowerCase().includes(genre.toLowerCase()));
+          const matchesModes = this.selectedModes.length === 0 || this.selectedModes.some(mode => game.modes.toLowerCase().includes(mode.toLowerCase()));
+          const matchesPlatforms = this.selectedPlatforms.length === 0 || this.selectedPlatforms.some(platform => game.platform.toLowerCase().includes(platform.toLowerCase()));
+
+          return matchesGenres && matchesModes && matchesPlatforms;
+        });
+      })
+    )
+
+  }
 
   ngOnInit(): void{
-    this.ownedGames = this.ownedService.getOwnedGames();
-    this.filteredGames = [...this.ownedGames];
-  }
+    //  this.filteredGames = [...this.ownedGames];
+     }
 
   genreFilterChange(selectedGenres: string[]): void{
     if(selectedGenres.includes('all') || selectedGenres.length === 0){
@@ -53,13 +68,6 @@ export class AllGamesComponent implements OnInit{
   }
 
   applyFilters(): void{
-    this.filteredGames = this.ownedGames.filter(game => {
-      const matchesGenres = this.selectedGenres.length === 0 || this.selectedGenres.some(genre => game.genres.toLowerCase().includes(genre.toLowerCase()));
-      const matchesModes = this.selectedModes.length === 0 || this.selectedModes.some(mode => game.modes.toLowerCase().includes(mode.toLowerCase()));
-      const matchesPlatforms = this.selectedPlatforms.length === 0 || this.selectedPlatforms.some(platform => game.platform.toLowerCase().includes(platform.toLowerCase()));
-
-      return matchesGenres && matchesModes && matchesPlatforms;
-    })
   }
 
   onOwnedChange(game: Game, isOwned: boolean): void{
@@ -69,6 +77,5 @@ export class AllGamesComponent implements OnInit{
     else{
       this.ownedService.removeFromMyGames(game);
     }
-    this.ownedGames = this.ownedService.getOwnedGames();
   }
 }

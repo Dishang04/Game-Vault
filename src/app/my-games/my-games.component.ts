@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit} from '@angular/core';
 import { OwnedService } from '../owned.service';
 import { Game } from '../game';
@@ -8,12 +9,14 @@ import { Game } from '../game';
   styleUrl: './my-games.component.css'
 })
 export class MyGamesComponent implements OnInit {
-  ownedGames: Game[] = [];
+  ownedGames$: Observable<Game[]>;
 
-  constructor(public ownedService: OwnedService){}
+  constructor(public ownedService: OwnedService){
+    this.ownedGames$ = this.ownedService.getOwnedGames();
+
+  }
 
   ngOnInit(): void{
-    this.ownedGames = this.ownedService.getOwnedGames();
   }
 
   onOwnedChange(game: Game, isOwned: boolean): void{
@@ -23,6 +26,5 @@ export class MyGamesComponent implements OnInit {
     else{
       this.ownedService.removeFromMyGames(game);
     }
-    this.ownedGames = this.ownedService.getOwnedGames();
   }
 }

@@ -28,7 +28,7 @@ export class GameService {
 
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       map(response => response.results.map((game: any) => ({
-        id: game.id,
+        game_id: game.id,
         name: game.name,
         // description: game.description_raw,
         // released: game.released,
@@ -49,7 +49,7 @@ export class GameService {
     return this.http.get<any>(url, { params }).pipe(
       tap(console.log),
       map(game => ({
-        id: game.id,
+        game_id: game.id,
         name: game.name,
         description: game.description_raw || game.description,
         // description: game.description,

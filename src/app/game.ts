@@ -1,5 +1,5 @@
 export interface Game{
-    id: number;
+    game_id: number;
     name: string;
     description: string;
     released: string;

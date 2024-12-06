@@ -35,7 +35,7 @@
     </div>
 
 <ul class="gamesList">
-    <li class="gameCard" *ngFor="let game of filteredGames">
+    <li class="gameCard" *ngFor="let game of filteredGames$ | async">
         <app-my-game-card 
             [game]="game"
             [isOwned]="ownedService.isOwned(game)"

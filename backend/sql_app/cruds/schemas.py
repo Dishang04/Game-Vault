@@ -49,10 +49,10 @@ class EmailRequest(BaseModel):
     email: str
     
 class Game(BaseModel):
-    platforms: List[str] = []
+    # platforms: List[str] = []
     user_id: int
     game_id: int
-    platform_name: str
+    # platform_name: str
 
     class Config:
         from_orm = True

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { OwnedService } from '../owned.service';
 import { FavoriteService } from '../favorite.service';
@@ -11,14 +12,17 @@ import { Location } from '@angular/common';
 })
 export class CurrentlyPlayingComponent implements OnInit{
   playingGames: Game[] = [];
-  ownedGames: Game[] = [];
+  ownedGames$: Observable<Game[]>;
   playedGames: Game[] = [];
 
   constructor( 
     public favoriteService: FavoriteService, 
     public ownedService: OwnedService, 
     private location: Location
-  ){}
+  ){
+    this.ownedGames$ = this.ownedService.getOwnedGames();
+
+  }
 
   ngOnInit(): void{
     this.playingGames = this.ownedService.getCurrentlyPlaying();
@@ -26,12 +30,12 @@ export class CurrentlyPlayingComponent implements OnInit{
 
   removeFromCurrentlyPlaying(game: Game): void{
     this.ownedService.removeFromCurrentlyPlaying(game);
-    this.playingGames = this.playingGames.filter(g => g.id !== game.id);
+    this.playingGames = this.playingGames.filter(g => g.game_id !== game.game_id);
   }
 
   removeFromPlayedGames(game: Game): void{
     this.ownedService.removeFromPlayedGames(game);
-    this.playedGames = this.playedGames.filter(g => g.id !== game.id);
+    this.playedGames = this.playedGames.filter(g => g.game_id !== game.game_id);
   }
 
   onFavoriteChange(game: Game, isFavorite: boolean): void{
@@ -50,7 +54,6 @@ export class CurrentlyPlayingComponent implements OnInit{
     else{
       this.ownedService.removeFromMyGames(game);
     }
-    this.ownedGames = this.ownedService.getOwnedGames();
   }
 
   onCurrentlyChange(game: Game, isCurrently: boolean): void {
