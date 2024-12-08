@@ -21,10 +21,22 @@ export class MyGameCardComponent implements OnInit{
 
   constructor(public ownedService: OwnedService) {}
 
+  // ngOnInit(): void {
+  //   console.log('game object:', this.game);
+  //   this.isOwned = this.ownedService.isOwned(this.game);
+  //   this.isCurrently = this.ownedService.isCurrently(this.game);
+  //   this.isPlayed = this.ownedService.isPlayed(this.game);
+  // }
+
   ngOnInit(): void {
-    this.isOwned = this.ownedService.isOwned(this.game);
-    this.isCurrently = this.ownedService.isCurrently(this.game);
-    this.isPlayed = this.ownedService.isPlayed(this.game);
+    this.ownedService.getDetailedGameInfo(this.game.game_id).subscribe(
+      detailedGame => {
+        this.game = detailedGame;
+      },
+      error => {
+        console.error('Error fetching game details:', error);
+      }
+    );
   }
 
   onOwnedToggle() {

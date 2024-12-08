@@ -74,6 +74,10 @@ export class OwnedService {
     return this.http.post<Game[]>('http://localhost:8000/mygames', { email: user.email })
   }
 
+  getDetailedGameInfo(gameId: number): Observable<Game> {
+    return this.gameService.getGameDetailsById(gameId);
+  }
+
 
 //  //WISHLIST
   addToWishlist(game: Game): void{

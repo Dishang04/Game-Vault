@@ -1,5 +1,6 @@
 <div class="gameCardClickable" [routerLink]="['/detail', game.game_id]">
     <h2 class="gameCardHeader">{{game.name}}</h2>
+    <!-- <p class="gameCardHeader">{{game.game_id}}</p> -->
     <img *ngIf="game.image" [src]="game.image" alt="{{ game.name }} Image" class="gameImage">
     <p class="gameCardInfo">
       Owned on platform:

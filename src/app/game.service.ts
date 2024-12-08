@@ -64,4 +64,25 @@ export class GameService {
       }))
     );
   }
+
+  getGameDetailsById(gameId: number): Observable<Game> {
+    const params = new HttpParams().set('key', this.apiKey);
+    const url = `${this.apiUrl}/${gameId}`;
+  
+    return this.http.get<any>(url, { params }).pipe(
+      map(game => ({
+        game_id: game.id,
+        name: game.name,
+        description: game.description_raw || game.description,
+        released: game.released,
+        platform: game.platforms.map((p: any) => p.platform.name).join(', '),
+        modes: game.tags.map((tag: any) => tag.name).filter((name: string) => 
+          name === 'Singleplayer' || name === 'Multiplayer').join(', '),
+        genres: game.genres.map((genre: any) => genre.name).join(', '),
+        developers: game.developers.map((developer: any) => developer.name).join(', '),
+        publishers: game.publishers.map((publisher: any) => publisher.name).join(', '),
+        image: game.background_image,
+      }))
+    );
+  }
 }
