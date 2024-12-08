@@ -169,7 +169,7 @@ def game_already_playing(db: Session, game: schemas.Game):
 
 def get_currently_playing(db: Session, user_id: int):
     print("get currenly playing")
-    return db.query(models.Currently).join(models.Added).filter(
+    return db.query(models.Currently).filter(
         models.Currently.added_game_id == user_id  #added_game_id is here owner_id
     ).all()
 
