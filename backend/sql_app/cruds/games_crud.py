@@ -22,7 +22,7 @@ def add_game(db: Session, game: schemas.Game):
 def game_exists(db: Session, game: schemas.Game):
     print("game id %s", game.game_id)
     print("user id %s", game.user_id)
-    q = db.query(models.Added).filter( and_(models.Added.game_id.like(game.game_id) , models.Added.owner_id.like(game.user_id)))
+    # q = db.query(models.Added).filter( and_(models.Added.game_id.like(game.game_id) , models.Added.owner_id.like(game.user_id)))
     # match = db.query(q.all()).scalar()
 
     matches = db.query(models.Added).filter( and_(models.Added.game_id.like(game.game_id) , models.Added.owner_id.like(game.user_id))).first()
@@ -139,19 +139,40 @@ def delete_from_wishlist(db: Session, wishlist_gameid: int, user_id: int):
 # Currently Playing
 
 def add_to_currently_playing(db: Session, game: schemas.Game):
-    db_game = get_added_game_info(game)
+    print(game)
+    db_game = get_added_game_info(db=db, game=game)
 
-    my_game = models.Currently(added_game_id=db_game.id)
+    my_game = models.Currently(added_game_id=db_game.id, game_id=game.game_id)
 
     db.add(my_game)
     db.commit()
     db.refresh(my_game)
     return my_game
+    
+
+def game_already_playing(db: Session, game: schemas.Game):
+    print("test2")
+    print("game id %s", game.game_id)
+    print("user id %s", game.user_id)
+    # q = db.query(models.Currently).filter( and_(models.Currently.game_id.like(game.game_id) , models.Currently.owner_id.like(game.user_id)))
+    # match = db.query(q.all()).scalar()
+
+    matches = db.query(models.Currently).filter( and_(models.Currently.added_game_id.like(game.game_id))).first()
+    print(matches)
+    # print("Match is %s", matches.game_id)
+    # print("Match is %s", matches.owner_id)
+
+    # exists = db.query(q.exists()).scalar()
+    # print("Exists is %s", exists)
+    return matches is not None
+
 
 def get_currently_playing(db: Session, user_id: int):
+    print("get currenly playing")
     return db.query(models.Currently).join(models.Added).filter(
-        models.Added.owner_id == user_id
+        models.Currently.added_game_id == user_id  #added_game_id is here owner_id
     ).all()
+
 
 def find_currently_playing_game(db: Session, game_id: int, user_id: int):
     return db.query(models.Currently).join(models.Added).filter(

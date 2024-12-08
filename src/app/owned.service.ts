@@ -104,7 +104,29 @@ export class OwnedService {
   //CURRENTLY PLAYING
   addToCurrentlyPlaying(game: Game): void{
     if(!this.isCurrently(game)){
+      // this.playingGames.push(game);
+
+      const user = this.userStorageService.getUser();
+
       this.playingGames.push(game);
+      // this.removeFromWishlist(game);
+
+      const gameData = {
+        user_id: user.id,
+        game_id: game.game_id
+      }
+
+      this.http.post('http://localhost:8000/addcurrently', gameData).subscribe(
+        (response: any) => {
+          console.log('User data retrieved successfully:', response);
+          // this.ownedGames = response;
+          this.playingGames = Array.isArray(response) ? response : []; // Ensure it's an array
+        },
+        (error) => {
+          console.error('Error fetching owned games data:', error);
+          this.playingGames = [];
+        }
+      );
     }
   }
   
@@ -116,8 +138,11 @@ export class OwnedService {
     return this.playingGames.some(g => g.game_id === game.game_id);
   }
 
-  getCurrentlyPlaying(): Game[]{
-    return this.playingGames;
+  getCurrentlyPlaying(): Observable<Game[]>{
+    // return this.playingGames;
+    const user = this.userStorageService.getUser();
+    
+    return this.http.post<Game[]>('http://localhost:8000/mycurrent', { email: user.email });
   }
 
   

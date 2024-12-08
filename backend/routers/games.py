@@ -69,18 +69,35 @@ def add_to_wishlist(newgame: schemas.NewGame, db: Session = Depends(get_db)):
 @router.post("/addcurrently")
 def add_to_currently(newgame: schemas.NewGame, db: Session = Depends(get_db)):
     game = schemas.Game(
-        platforms= [],
+        # platforms= [],
         user_id= newgame.user_id,
         game_id= newgame.game_id
     )
+    print("test1")
+    exists = games_crud.game_already_playing(db=db, game=game)
+    print("test3")
+    game_added = False
+    print("Exists: %s", exists)
+    if not exists:
+        game_added = games_crud.add_to_currently_playing(db=db, game=game)
 
-    game_existing = games_crud.find_currently_playing_game(db=db, game_id=game.game_id, user_id=game.user_id)
+    print("game_added: %s", game_added)
 
-    if game_existing:
-        raise HTTPException(status_code=403, detail="Game already in Wishlist")
+    if game_added:
+        print("added game to mygames")
+        return {"message": f"Succesfully added!"}
 
-    added_game = games_crud.check_if_added(db=db, game=game)
-    games_crud.add_to_currently_playing(db=db, game=added_game)
+    
+    else:
+        raise HTTPException(status_code=403, detail="Game could not be added")
+
+    # game_existing = games_crud.find_currently_playing_game(db=db, game_id=game.game_id, user_id=game.user_id)
+
+    # if game_existing:
+    #     raise HTTPException(status_code=403, detail="Game already in Wishlist")
+
+    # added_game = games_crud.check_if_added(db=db, game=game)
+    # games_crud.add_to_currently_playing(db=db, game=added_game)
 
 @router.post("/addfinished")
 def add_to_finished(newgame: schemas.NewGame, db: Session = Depends(get_db)):
@@ -182,6 +199,7 @@ async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depend
 
     my_games = games_crud.get_my_games(db=db, user_id=current_user.id)
     print("succesfully gotten games")
+    print(my_games)
     
     print(my_games[0].id, my_games[0].owner_id, len(my_games))
     print(my_games[-1].game_id)
@@ -189,11 +207,20 @@ async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depend
     return [schemas.ReturnGame.from_orm(game) for game in my_games]
 
 
-@router.post("/mycurrent", response_model=schemas.Game)
-async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):
+@router.post("/mycurrent", response_model=List[schemas.ReturnGame])
+async def get_currently_playing(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):
+    print("test get user")
     current_user = user_crud.get_user_by_email(db=db, email=email_request.email)
+    print("current_user %s", current_user)
     my_current = games_crud.get_currently_playing(db=db, user_id=current_user.id)
-    return my_current
+    print(my_current)
+    print("test get my current and user")
+    # return my_current
+    print(my_current[0].id, len(my_current))
+    print(my_current[-1].added_game_id)
+    print([schemas.ReturnGame.from_orm(game) for game in my_current])
+    print("schemas test1")
+    return [schemas.ReturnGame.from_orm(game) for game in my_current]
 
 @router.post("/myfinished", response_model=schemas.Game)
 async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):

@@ -10,8 +10,8 @@ import { Location } from '@angular/common';
   templateUrl: './currently-playing.component.html',
   styleUrl: './currently-playing.component.css'
 })
-export class CurrentlyPlayingComponent implements OnInit{
-  playingGames: Game[] = [];
+export class CurrentlyPlayingComponent{
+  playingGames$: Observable<Game[]>;
   ownedGames$: Observable<Game[]>;
   playedGames: Game[] = [];
 
@@ -21,16 +21,16 @@ export class CurrentlyPlayingComponent implements OnInit{
     private location: Location
   ){
     this.ownedGames$ = this.ownedService.getOwnedGames();
-
+    this.playingGames$ = this.ownedService.getCurrentlyPlaying();
   }
 
-  ngOnInit(): void{
-    this.playingGames = this.ownedService.getCurrentlyPlaying();
-  }
+  // ngOnInit(): void{
+  //   this.playingGames$ = this.ownedService.getCurrentlyPlaying();
+  // }
 
   removeFromCurrentlyPlaying(game: Game): void{
     this.ownedService.removeFromCurrentlyPlaying(game);
-    this.playingGames = this.playingGames.filter(g => g.game_id !== game.game_id);
+    // this.playingGames = this.playingGames.filter(g => g.game_id !== game.game_id);
   }
 
   removeFromPlayedGames(game: Game): void{
@@ -62,7 +62,7 @@ export class CurrentlyPlayingComponent implements OnInit{
     } 
     else{
       this.ownedService.addToCurrentlyPlaying(game);
-      this.playingGames.push(game);
+      // this.playingGames.push(game);
     }
   }
 

@@ -84,6 +84,7 @@ class WishList(database.Base):
 class Currently(database.Base):
     __tablename__ = "currentlyplaying"
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False, index=True)
+    game_id = Column(Integer, nullable=False)
 
     # Relationships
     added_game_id = Column(Integer, ForeignKey("added.id"), nullable=False)
