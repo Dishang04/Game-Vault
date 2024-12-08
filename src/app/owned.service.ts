@@ -71,7 +71,7 @@ export class OwnedService {
   getOwnedGames(): Observable<Game[]>{
     const user = this.userStorageService.getUser();
     
-    return this.http.post<Game[]>('http://localhost:8000/mygames', { email: user.email })
+    return this.http.post<Game[]>('http://localhost:8000/mygames', { email: user.email });
   }
 
   getDetailedGameInfo(gameId: number): Observable<Game> {
