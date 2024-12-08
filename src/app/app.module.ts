@@ -1,3 +1,7 @@
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule} from '@angular/material/select';
@@ -58,6 +62,8 @@ import { AllGamesComponent } from './all-games/all-games.component';
     MatSelectModule,
     MatMenuModule,
     MatTabsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
   ],
   providers: [
     provideClientHydration(),
