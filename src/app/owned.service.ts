@@ -147,9 +147,37 @@ export class OwnedService {
 
   
   //FINISHED GAMES
+  // addToPlayedGames(game: Game): void{
+  //   if(!this.isPlayed(game)){
+  //     this.playedGames.push(game);
+  //   }
+  // }
+
+  //I THINK THIS IS RIGHT FUNCTION NOW
   addToPlayedGames(game: Game): void{
     if(!this.isPlayed(game)){
+      // this.playingGames.push(game);
+
+      const user = this.userStorageService.getUser();
+
       this.playedGames.push(game);
+
+      const gameData = {
+        user_id: user.id,
+        game_id: game.game_id
+      }
+
+      this.http.post('http://localhost:8000/addfinished', gameData).subscribe(
+        (response: any) => {
+          console.log('User data retrieved successfully:', response);
+          // this.ownedGames = response;
+          this.playedGames = Array.isArray(response) ? response : []; // Ensure it's an array
+        },
+        (error) => {
+          console.error('Error fetching owned games data:', error);
+          this.playedGames = [];
+        }
+      );
     }
   }
 
@@ -161,7 +189,10 @@ export class OwnedService {
     return this.playedGames.some(g => g.game_id === game.game_id);
   }
 
-  getPlayedGames(): Game[]{
-    return this.playedGames;
+  getPlayedGames(): Observable<Game[]>{
+    // return this.playedGames;
+    const user = this.userStorageService.getUser();
+    
+    return this.http.post<Game[]>('http://localhost:8000/myfinished', { email: user.email });
   }
 }

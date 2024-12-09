@@ -191,14 +191,29 @@ def delete_from_currently_playing(db: Session, currently_playing_gameid: int, us
 # Finished Games
 
 def add_to_finished(db: Session, game: schemas.Game):
-    db_game = get_added_game_info(game)
+    print(game)
+    print("reached add to finsiehd")
+    db_game = get_added_game_info(db=db, game=game)
 
-    my_game = models.Finished(added_game_id=db_game.id)
+    my_game = models.Finished(added_game_id=db_game.id, game_id=game.game_id)
+    print("my game")
+    print(my_game)
 
     db.add(my_game)
     db.commit()
     db.refresh(my_game)
     return my_game
+
+# def add_to_currently_playing(db: Session, game: schemas.Game):
+#     print(game)
+#     db_game = get_added_game_info(db=db, game=game)
+
+#     my_game = models.Currently(added_game_id=db_game.id, game_id=game.game_id)
+
+#     db.add(my_game)
+#     db.commit()
+#     db.refresh(my_game)
+#     return my_game
 
 def get_finished(db: Session, user_id: int):
     return db.query(models.Finished).join(models.Added).filter(
@@ -210,6 +225,23 @@ def find_finished_game(db: Session, game_id: int, user_id: int):
         models.Added.owner_id == user_id,
         models.Added.game_id == game_id
     ).first()
+
+def game_already_played(db: Session, game: schemas.Game):
+    print("test2")
+    print("game id %s", game.game_id)
+    print("user id %s", game.user_id)
+    # q = db.query(models.Currently).filter( and_(models.Currently.game_id.like(game.game_id) , models.Currently.owner_id.like(game.user_id)))
+    # match = db.query(q.all()).scalar()
+
+    matches = db.query(models.Finished).filter( and_(models.Finished.added_game_id.like(game.game_id))).first()
+    print("test3.5")
+    print(matches)
+    # print("Match is %s", matches.game_id)
+    # print("Match is %s", matches.owner_id)
+
+    # exists = db.query(q.exists()).scalar()
+    # print("Exists is %s", exists)
+    return matches is not None
 
 def delete_from_finished(db: Session, finished_gameid: int, user_id: int):
     db_finished_item = db.query(models.Finished).filter(models.Finished.owner_id == user_id and models.Finished.game_id == finished_gameid).first()

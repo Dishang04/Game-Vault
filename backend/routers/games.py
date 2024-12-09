@@ -106,13 +106,31 @@ def add_to_finished(newgame: schemas.NewGame, db: Session = Depends(get_db)):
         user_id= newgame.user_id,
         game_id= newgame.game_id
     )
-    game_existing = games_crud.find_finished_game(db=db, game_id=game.game_id, user_id=game.user_id)
-    
-    if game_existing:
-        raise HTTPException(status_code=403, detail="Game already in Finished")
+    print("test1")
+    exists = games_crud.game_already_played(db=db, game=game)
+    print("test3")
+    game_added = False
+    print("Exists: %s", exists)
+    print("go to add finished")
+    if not exists:
+        game_added = games_crud.add_to_finished(db=db, game=game)
 
-    added_game = games_crud.check_if_added(db=db, game=game)
-    games_crud.add_to_finished(db=db, game=added_game)
+    print("game_added: %s", game_added)
+
+    if game_added:
+        print("added game to mygames")
+        return {"message": f"Succesfully added!"}
+
+    
+    else:
+        raise HTTPException(status_code=403, detail="Game could not be added")
+    # game_existing = games_crud.find_finished_game(db=db, game_id=game.game_id, user_id=game.user_id)
+    
+    # if game_existing:
+    #     raise HTTPException(status_code=403, detail="Game already in Finished")
+
+    # added_game = games_crud.check_if_added(db=db, game=game)
+    # games_crud.add_to_finished(db=db, game=added_game)
 
 @router.post("/addplatform")
 def add_platform(game: schemas.Game, db: Session = Depends(get_db)):

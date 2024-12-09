@@ -93,6 +93,7 @@ class Currently(database.Base):
 class Finished(database.Base):
     __tablename__ = "finished"
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False, index=True)
+    game_id = Column(Integer, nullable=False)
 
     # Relationships
     added_game_id = Column(Integer, ForeignKey("added.id"), nullable=False)

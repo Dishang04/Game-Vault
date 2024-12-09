@@ -9,24 +9,25 @@ import { OwnedService } from '../owned.service';
   templateUrl: './played-games.component.html',
   styleUrl: './played-games.component.css'
 })
-export class PlayedGamesComponent implements OnInit{
-  playedGames: Game[] = [];
+export class PlayedGamesComponent{
+  playedGames$: Observable<Game[]>;
   ownedGames$: Observable<Game[]>;
 
   constructor(
     public favoriteService: FavoriteService, 
     public ownedService: OwnedService, 
   ){
+    this.playedGames$ = this.ownedService.getPlayedGames();
     this.ownedGames$ = this.ownedService.getOwnedGames();
   }
 
-  ngOnInit(): void{
-    this.playedGames = this.ownedService.getPlayedGames();
-  }
+  // ngOnInit(): void{
+  //   this.playedGames = this.ownedService.getPlayedGames();
+  // }
 
   removeFromPlayedGames(game: Game): void{
     this.ownedService.removeFromPlayedGames(game);
-    this.playedGames = this.playedGames.filter(g => g.game_id !== game.game_id);
+    // this.playedGames = this.playedGames.filter(g => g.game_id !== game.game_id);
   }
 
   onFavoriteChange(game: Game, isFavorite: boolean): void{
@@ -63,7 +64,7 @@ export class PlayedGamesComponent implements OnInit{
     }
     else{
       this.ownedService.addToPlayedGames(game);
-      this.playedGames.push(game);
+      // this.playedGames.push(game);
     }
   }
 
