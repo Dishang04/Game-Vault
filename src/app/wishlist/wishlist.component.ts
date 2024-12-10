@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Game } from '../game';
 import { FavoriteService } from '../favorite.service';
@@ -8,22 +9,24 @@ import { OwnedService } from '../owned.service';
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })
-export class WishlistComponent implements OnInit {
-  favoriteGames: Game[] = [];
+export class WishlistComponent{
+  favoriteGames$: Observable<Game[]>;
 
   constructor( 
     public favoriteService: FavoriteService, 
     public ownedService: OwnedService
-  ){}
-
-  ngOnInit(): void{
-    this.favoriteGames = this.favoriteService.getFavoriteGames();
+  ){
+    this.favoriteGames$ = this.favoriteService.getFavoriteGames();
   }
+
+  // ngOnInit(): void{
+  //   this.favoriteGames = this.favoriteService.getFavoriteGames();
+  // }
 
   onFavoriteChange(game: Game, isFavorite: boolean): void{
     if(!isFavorite){
       this.favoriteService.removeFavorite(game);
-      this.favoriteGames = this.favoriteService.getFavoriteGames();
+      this.favoriteGames$ = this.favoriteService.getFavoriteGames();
     }
   }
 
@@ -31,7 +34,7 @@ export class WishlistComponent implements OnInit {
     if(isOwned){
       this.ownedService.addToMyGames(game);
       this.favoriteService.removeFavorite(game);
-      this.favoriteGames = this.favoriteService.getFavoriteGames();
+      this.favoriteGames$ = this.favoriteService.getFavoriteGames();
     }
   }
 }

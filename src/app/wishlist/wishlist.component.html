@@ -1,7 +1,7 @@
 <h1>Wishlist</h1>
 
 <ul class="gamesList">
-    <li class="gameCard" *ngFor="let game of favoriteGames" >
+    <li class="gameCard" *ngFor="let game of favoriteGames$ |async" >
         <app-game-card 
             [game]="game"
             [isFavorite]="favoriteService.isFavorite(game)"

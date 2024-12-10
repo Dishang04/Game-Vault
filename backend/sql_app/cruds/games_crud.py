@@ -109,9 +109,9 @@ def delete_from_my_games(db: Session, my_game_id: int, user_id: int):
 # Wishlist
 
 def add_to_wishlist(db: Session, game: schemas.Game):
-    db_game = get_added_game_info(game)
+    db_game = get_added_game_info(db=db, game=game)
 
-    my_game = models.WishList(added_game_id=db_game.id)
+    my_game = models.WishList(added_game_id=db_game.id, game_id=game.game_id)
 
     db.add(my_game)
     db.commit()
@@ -122,6 +122,23 @@ def get_wishlist(db: Session, user_id: int):
     return db.query(models.WishList).join(models.Added).filter(
         models.Added.owner_id == user_id
     ).all()
+
+def game_already_in_wishlist(db: Session, game: schemas.Game):
+    print("test2")
+    print("game id %s", game.game_id)
+    print("user id %s", game.user_id)
+    # q = db.query(models.Currently).filter( and_(models.Currently.game_id.like(game.game_id) , models.Currently.owner_id.like(game.user_id)))
+    # match = db.query(q.all()).scalar()
+
+    matches = db.query(models.WishList).filter( and_(models.WishList.added_game_id.like(game.game_id))).first()
+    print("test3.5")
+    print(matches)
+    # print("Match is %s", matches.game_id)
+    # print("Match is %s", matches.owner_id)
+
+    # exists = db.query(q.exists()).scalar()
+    # print("Exists is %s", exists)
+    return matches is not None
 
 def find_wishlist_game(db: Session, game_id: int, user_id: int):
     return db.query(models.WishList).join(models.Added).filter(
@@ -204,21 +221,18 @@ def add_to_finished(db: Session, game: schemas.Game):
     db.refresh(my_game)
     return my_game
 
-# def add_to_currently_playing(db: Session, game: schemas.Game):
-#     print(game)
-#     db_game = get_added_game_info(db=db, game=game)
-
-#     my_game = models.Currently(added_game_id=db_game.id, game_id=game.game_id)
-
-#     db.add(my_game)
-#     db.commit()
-#     db.refresh(my_game)
-#     return my_game
-
 def get_finished(db: Session, user_id: int):
-    return db.query(models.Finished).join(models.Added).filter(
-        models.Added.owner_id == user_id
+    print("get finished games")
+    return db.query(models.Finished).filter(
+        models.Finished.added_game_id == user_id
     ).all()
+
+# def get_currently_playing(db: Session, user_id: int):
+#     print("get currenly playing")
+#     return db.query(models.Currently).filter(
+#         models.Currently.added_game_id == user_id  #added_game_id is here owner_id
+#     ).all()
+    
 
 def find_finished_game(db: Session, game_id: int, user_id: int):
     return db.query(models.Finished).join(models.Added).filter(
