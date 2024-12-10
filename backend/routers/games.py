@@ -254,7 +254,7 @@ async def get_currently_playing(email_request: schemas.EmailRequest, db: Session
     return [schemas.ReturnGame.from_orm(game) for game in my_current]
 
 @router.post("/myfinished", response_model=schemas.Game)
-async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):
+async def get_finished(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):
     print("test get user")
     current_user = user_crud.get_user_by_email(db=db, email=email_request.email)
     print("finished_user %s", current_user)
@@ -269,8 +269,10 @@ async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depend
     return [schemas.ReturnGame.from_orm(game) for game in my_finished]
 
 @router.post("/mywishlist", response_model=schemas.Game)
-async def get_my_games(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):
+async def get_wishlist(email_request: schemas.EmailRequest, db: Session = Depends(get_db)):
+    print("test wishlist")
     current_user = user_crud.get_user_by_email(db=db, email=email_request.email)
     my_wishlist = games_crud.get_wishlist(db=db, user_id=current_user.id)
-    return my_wishlist
+    # return my_wishlist
+    return [schemas.ReturnGame.from_orm(game) for game in my_wishlist]
 

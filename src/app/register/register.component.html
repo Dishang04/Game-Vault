@@ -1,5 +1,6 @@
-<h2>Create a New Account</h2>
+<h1>Create a New Account</h1>
 <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+    <div class="formContainer">
     <div class="form-group">
         <label for="firstname">First Name</label>
         <input type="text" id="firstname" name="firstname" ngModel required class="form-control" />
@@ -19,6 +20,10 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" ngModel required class="form-control" />
     </div>
+</div>
 
+    <div class="container">
+    <button type="button" class="cancelbtn" (click)="goBack()">Cancel</button>
     <button type="submit" [disabled]="!registerForm.form.valid" class="btn btn-primary">Register</button>
+</div>
 </form>

@@ -4,6 +4,7 @@ import { User } from '../user';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ export class RegisterComponent {
   constructor(
     private http: HttpClient, 
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private location: Location
   ) {}
 
   onSubmit(form: NgForm) {
@@ -38,5 +40,9 @@ export class RegisterComponent {
         }
       );
     }
+  }
+
+  goBack(): void{
+    this.location.back();
   }
 }

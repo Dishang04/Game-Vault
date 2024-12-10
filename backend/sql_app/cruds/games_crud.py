@@ -118,9 +118,9 @@ def add_to_wishlist(db: Session, game: schemas.Game):
     db.refresh(my_game)
     return my_game
 
-def get_wishlist(db: Session, user_id: int):    
-    return db.query(models.WishList).join(models.Added).filter(
-        models.Added.owner_id == user_id
+def get_wishlist(db: Session, user_id: int):   
+    return db.query(models.WishList).filter(
+        models.WishList.added_game_id == user_id     #added_game_id is here owner_id
     ).all()
 
 def game_already_in_wishlist(db: Session, game: schemas.Game):
@@ -130,7 +130,8 @@ def game_already_in_wishlist(db: Session, game: schemas.Game):
     # q = db.query(models.Currently).filter( and_(models.Currently.game_id.like(game.game_id) , models.Currently.owner_id.like(game.user_id)))
     # match = db.query(q.all()).scalar()
 
-    matches = db.query(models.WishList).filter( and_(models.WishList.added_game_id.like(game.game_id))).first()
+    matches = db.query(models.WishList).filter( and_(models.WishList.game_id.like(game.game_id) , models.WishList.added_game_id.like(game.user_id))).first()
+
     print("test3.5")
     print(matches)
     # print("Match is %s", matches.game_id)
@@ -174,7 +175,8 @@ def game_already_playing(db: Session, game: schemas.Game):
     # q = db.query(models.Currently).filter( and_(models.Currently.game_id.like(game.game_id) , models.Currently.owner_id.like(game.user_id)))
     # match = db.query(q.all()).scalar()
 
-    matches = db.query(models.Currently).filter( and_(models.Currently.added_game_id.like(game.game_id))).first()
+    matches = db.query(models.Currently).filter( and_(models.Currently.game_id.like(game.game_id) , models.Currently.added_game_id.like(game.user_id))).first()
+
     print(matches)
     # print("Match is %s", matches.game_id)
     # print("Match is %s", matches.owner_id)
@@ -247,7 +249,8 @@ def game_already_played(db: Session, game: schemas.Game):
     # q = db.query(models.Currently).filter( and_(models.Currently.game_id.like(game.game_id) , models.Currently.owner_id.like(game.user_id)))
     # match = db.query(q.all()).scalar()
 
-    matches = db.query(models.Finished).filter( and_(models.Finished.added_game_id.like(game.game_id))).first()
+    matches = db.query(models.Finished).filter( and_(models.Finished.game_id.like(game.game_id) , models.Finished.added_game_id.like(game.user_id))).first()
+
     print("test3.5")
     print(matches)
     # print("Match is %s", matches.game_id)

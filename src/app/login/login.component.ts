@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserStorageService } from '../user-storage.service';
 import { UserService } from '../user.service';
+import { Location } from '@angular/common';
 // import { NgForm } from '@angular/forms';
 
 @Component({
@@ -20,7 +21,8 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private userStorageService: UserStorageService,
-    private userService: UserService
+    private userService: UserService,
+    private location: Location
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -64,5 +66,9 @@ export class LoginComponent {
         }
       );
     }
+  }
+
+  goBack(): void{
+    this.location.back();
   }
 }

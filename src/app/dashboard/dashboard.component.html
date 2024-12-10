@@ -2,12 +2,14 @@
 
 <div *ngIf="isLoggedIn">
     <h2>Welcome {{ firstname }}</h2>
-    <button class="logout" (click)="logout()">Logout</button>
+    <div class="container containerLogout">
+        <button class="logout" (click)="logout()">Logout</button>
+    </div>
 </div>
 
-<div *ngIf="!isLoggedIn">
-    <button [routerLink]="['/login']">Login</button>
-    <button [routerLink]="['/register']">Register</button>
+<div class="container" *ngIf="!isLoggedIn">
+    <button class="login" [routerLink]="['/login']">Login</button>
+    <button class="register" [routerLink]="['/register']">Register</button>
 </div>
 
 <router-outlet></router-outlet>
