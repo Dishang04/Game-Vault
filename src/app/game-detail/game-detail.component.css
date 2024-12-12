@@ -51,7 +51,7 @@ h1{
 
 .saveOptions{
   margin-bottom: 20px;
-  background-color: purple;
+  /* background-color: purple; */
 }
 
 .wishlistButton{
@@ -63,9 +63,9 @@ h1{
   margin-right: 30px;
 }
 
-.tags{
+/* .tags{
   background-color: red;
-}
+} */
 
 .gameImage{
   width: 100%; 
