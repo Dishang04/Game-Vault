@@ -2,7 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
 
-![Game-Vault](https://socialify.git.ci/Dishang04/Game-Vault/image?custom_description=For+a+school+assignment+you+had+to+choose+your+own+project.+Game+Vault+is+a+website+like+Goodreads+but+for+games.&description=1&language=1&name=1&owner=1&theme=Light)
+![Game-Vault](https://socialify.git.ci/Dishang04/Game-Vault/image?custom_description=For+a+school+assignment+you+had+to+choose+your+own+project.+Game+Vault+is+an+app+like+Goodreads+but+for+games.&description=1&language=1&name=1&owner=1&theme=Light)
+
+<img width="1918" height="878" alt="image" src="https://github.com/user-attachments/assets/cf9b9fb7-99d5-4847-bc12-bf4959b0f446" />
+
 
 ## Development server
 
