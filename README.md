@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
 
+https://socialify.git.ci/Dishang04/Game-Vault/image?custom_description=For+a+school+assignment+you+had+to+choose+your+own+project.+Game+Vault+is+a+website+like+Goodreads+but+for+games.&description=1&language=1&name=1&owner=1&theme=Light
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
