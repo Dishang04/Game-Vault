@@ -6,6 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 <img width="1918" height="878" alt="image" src="https://github.com/user-attachments/assets/cf9b9fb7-99d5-4847-bc12-bf4959b0f446" />
 
+<img width="1149" height="762" alt="image" src="https://github.com/user-attachments/assets/151e14f0-db5e-43a6-b13d-084e6426c579" />
 
 ## Development server
 
